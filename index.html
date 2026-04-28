@@ -13,6 +13,44 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Reading progress bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Custom cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
+
+    <!-- Mobile bottom nav -->
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="#hero" class="mobile-nav__item" data-label="🏠">
+        <span class="mobile-nav__dot"></span>
+        <span class="mobile-nav__label">Beranda</span>
+      </a>
+      <a href="#section-01" class="mobile-nav__item" data-label="⛽">
+        <span class="mobile-nav__dot"></span>
+        <span class="mobile-nav__label">Krisis</span>
+      </a>
+      <a href="#section-02" class="mobile-nav__item" data-label="🌿">
+        <span class="mobile-nav__dot"></span>
+        <span class="mobile-nav__label">Solusi</span>
+      </a>
+      <a href="#section-03" class="mobile-nav__item" data-label="🤖">
+        <span class="mobile-nav__dot"></span>
+        <span class="mobile-nav__label">Inovasi</span>
+      </a>
+      <a href="#section-04" class="mobile-nav__item" data-label="✅">
+        <span class="mobile-nav__dot"></span>
+        <span class="mobile-nav__label">Dampak</span>
+      </a>
+      <a href="#section-facts" class="mobile-nav__item" data-label="📊">
+        <span class="mobile-nav__dot"></span>
+        <span class="mobile-nav__label">Fakta</span>
+      </a>
+      <a href="#section-cta" class="mobile-nav__item" data-label="⚡">
+        <span class="mobile-nav__dot"></span>
+        <span class="mobile-nav__label">Aksi</span>
+      </a>
+    </nav>
     <!-- HERO -->
     <section class="hero" id="hero">
       <div class="hero__grid-overlay"></div>
@@ -21,7 +59,7 @@
         <div class="hero__badge">SMART SOLUTION FOR A BETTER EARTH</div>
         <h1 class="hero__title">
           <span class="hero__title--line1">INOVASI</span>
-          <span class="hero__title--line2">ENERGI TERBARUKAN</span>
+          <span class="hero__title--line2" id="typingTarget">ENERGI TERBARUKAN</span>
           <span class="hero__title--line3">UNTUK MASA DEPAN BERKELANJUTAN</span>
         </h1>
         <p class="hero__tagline">

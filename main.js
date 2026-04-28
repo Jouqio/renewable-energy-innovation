@@ -1,8 +1,70 @@
 /* ===========================
-   main.js — Inovasi Energi Terbarukan
+   main.js — Inovasi Energi Terbarukan (Enhanced)
    =========================== */
 
-// ─── PARTICLES (Hero) ───────────────────────────────────────────────────────
+// ─── READING PROGRESS BAR ────────────────────────────────────────────────────
+(function initProgressBar() {
+  const bar = document.getElementById('progressBar');
+  if (!bar) return;
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+})();
+
+
+// ─── CUSTOM CURSOR ────────────────────────────────────────────────────────────
+(function initCursor() {
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+  const cursor = document.getElementById('cursor');
+  const trail = document.getElementById('cursorTrail');
+  if (!cursor || !trail) return;
+
+  let mx = -100, my = -100;
+
+  window.addEventListener('mousemove', (e) => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top  = my + 'px';
+    setTimeout(() => {
+      trail.style.left = mx + 'px';
+      trail.style.top  = my + 'px';
+    }, 80);
+  });
+
+  document.querySelectorAll('a, button, .etab-btn, .crisis-card, .tech-card, .fact-card, .cta-action').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+  });
+})();
+
+
+// ─── TYPING EFFECT on hero title ─────────────────────────────────────────────
+(function initTyping() {
+  const el = document.getElementById('typingTarget');
+  if (!el) return;
+
+  const text = 'ENERGI TERBARUKAN';
+  el.textContent = '';
+  el.style.opacity = '1';
+
+  let i = 0;
+  setTimeout(() => {
+    const interval = setInterval(() => {
+      el.textContent += text[i];
+      i++;
+      if (i >= text.length) {
+        clearInterval(interval);
+        setTimeout(() => el.classList.add('typing-done'), 1200);
+      }
+    }, 75);
+  }, 900);
+})();
+
+
+// ─── PARTICLES (Hero) ────────────────────────────────────────────────────────
 (function initParticles() {
   const container = document.getElementById('particles');
   if (!container) return;
@@ -25,16 +87,13 @@
       left: x + '%',
       top: y + '%',
       background: isGreen ? 'rgba(57,255,20,0.7)' : 'rgba(0,229,255,0.7)',
-      boxShadow: isGreen
-        ? '0 0 8px rgba(57,255,20,0.8)'
-        : '0 0 8px rgba(0,229,255,0.8)',
+      boxShadow: isGreen ? '0 0 8px rgba(57,255,20,0.8)' : '0 0 8px rgba(0,229,255,0.8)',
       animation: `particleFloat ${dur}s ${delay}s ease-in-out infinite`,
       opacity: 0,
     });
     container.appendChild(p);
   }
 
-  // inject keyframes
   const style = document.createElement('style');
   style.textContent = `
     @keyframes particleFloat {
@@ -59,23 +118,16 @@
       const delay = el.dataset.delay || 0;
       el.style.transitionDelay = delay + 'ms';
       el.classList.add('visible');
-
-      // Trigger bar fills
       el.querySelectorAll('.bar-fill').forEach(bar => bar.classList.add('animated'));
-
       observer.unobserve(el);
     });
   }, options);
 
-  // Cards & items
-  document.querySelectorAll(
-    '.crisis-card, .tech-card, .impact-item'
-  ).forEach(el => {
+  document.querySelectorAll('.crisis-card, .tech-card, .impact-item').forEach(el => {
     el.style.setProperty('--delay', el.dataset.delay || 0);
     observer.observe(el);
   });
 
-  // Bars (standalone)
   const barObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -86,12 +138,12 @@
   }, { threshold: 0.3 });
   document.querySelectorAll('.crisis-visual').forEach(el => barObserver.observe(el));
 
-  // Fact counters
   const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const el = entry.target;
       const target = parseInt(el.dataset.target, 10);
+      el.classList.add('counting');
       animateCounter(el, target);
       counterObserver.unobserve(el);
     });
@@ -104,57 +156,82 @@
 function animateCounter(el, target) {
   const duration = 2000;
   const start = performance.now();
-  const startVal = 0;
-
   function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
-
   function step(now) {
     const elapsed = now - start;
     const progress = Math.min(elapsed / duration, 1);
     const value = Math.round(easeOutQuart(progress) * target);
     el.textContent = value.toLocaleString('id-ID');
     if (progress < 1) requestAnimationFrame(step);
+    else el.classList.remove('counting');
   }
   requestAnimationFrame(step);
 }
 
 
-// ─── ENERGY TABS ─────────────────────────────────────────────────────────────
+// ─── ENERGY TABS — animated transition ──────────────────────────────────────
 (function initTabs() {
   const btns = document.querySelectorAll('.etab-btn');
-  btns.forEach(btn => {
+  btns.forEach((btn, i) => {
     btn.addEventListener('click', () => {
       const tab = btn.dataset.tab;
       btns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+
       document.querySelectorAll('.energy-tab-content').forEach(c => {
         c.classList.add('hidden');
+        c.classList.remove('tab-entering');
       });
+
       const target = document.getElementById('tab-' + tab);
-      if (target) target.classList.remove('hidden');
+      if (target) {
+        target.classList.remove('hidden');
+        void target.offsetWidth;
+        target.classList.add('tab-entering');
+      }
+    });
+
+    btn.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        btns[(i + 1) % btns.length].click();
+        btns[(i + 1) % btns.length].focus();
+      }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        btns[(i - 1 + btns.length) % btns.length].click();
+        btns[(i - 1 + btns.length) % btns.length].focus();
+      }
     });
   });
 })();
 
 
-// ─── SIDENAV — Active Section Tracking ───────────────────────────────────────
+// ─── SIDENAV + MOBILE NAV — Active Section Tracking ─────────────────────────
 (function initSidenav() {
   const dots = document.querySelectorAll('.sidenav__dot');
+  const mobileDots = document.querySelectorAll('.mobile-nav__item');
   const sections = [];
+
   dots.forEach(dot => {
     const href = dot.getAttribute('href');
     const el = document.querySelector(href);
-    if (el) sections.push({ dot, el });
+    if (el) sections.push({ dot, href, el });
+  });
+
+  const mobileMap = {};
+  mobileDots.forEach(item => {
+    mobileMap[item.getAttribute('href')] = item;
   });
 
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const match = sections.find(s => s.el === entry.target);
-      if (match) {
-        if (entry.isIntersecting) {
-          dots.forEach(d => d.classList.remove('active'));
-          match.dot.classList.add('active');
-        }
+      if (match && entry.isIntersecting) {
+        dots.forEach(d => d.classList.remove('active'));
+        match.dot.classList.add('active');
+        mobileDots.forEach(d => d.classList.remove('active'));
+        if (mobileMap[match.href]) mobileMap[match.href].classList.add('active');
       }
     });
   }, { threshold: 0.4 });
@@ -163,7 +240,7 @@ function animateCounter(el, target) {
 })();
 
 
-// ─── SCROLL TO TOP BUTTON ────────────────────────────────────────────────────
+// ─── SCROLL TO TOP ────────────────────────────────────────────────────────────
 (function initScrollTop() {
   const btn = document.getElementById('scrollTop');
   if (!btn) return;
@@ -174,7 +251,7 @@ function animateCounter(el, target) {
 })();
 
 
-// ─── CTA BACKGROUND ANIMATED STARS ──────────────────────────────────────────
+// ─── CTA BACKGROUND STARS ────────────────────────────────────────────────────
 (function initCtaBg() {
   const container = document.getElementById('cta-bg');
   if (!container) return;
@@ -205,7 +282,7 @@ function animateCounter(el, target) {
 })();
 
 
-// ─── SMOOTH HEADER HIDE ON SCROLL ────────────────────────────────────────────
+// ─── HERO FADE ON SCROLL ──────────────────────────────────────────────────────
 (function initHeroFade() {
   const hero = document.querySelector('.hero__content');
   if (!hero) return;
@@ -219,8 +296,9 @@ function animateCounter(el, target) {
 })();
 
 
-// ─── TILT EFFECT on tech cards ───────────────────────────────────────────────
+// ─── TILT EFFECT ─────────────────────────────────────────────────────────────
 (function initTilt() {
+  if (window.matchMedia('(pointer: coarse)').matches) return;
   document.querySelectorAll('.tech-card, .fact-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const rect = card.getBoundingClientRect();
@@ -233,5 +311,28 @@ function animateCounter(el, target) {
     card.addEventListener('mouseleave', () => {
       card.style.transform = '';
     });
+  });
+})();
+
+
+// ─── SECTION PAGE LABELS ──────────────────────────────────────────────────────
+(function initSectionLabels() {
+  const map = {
+    'section-01': '01 / 06',
+    'section-02': '02 / 06',
+    'section-03': '03 / 06',
+    'section-04': '04 / 06',
+    'section-facts': '05 / 06',
+    'section-cta': '06 / 06',
+  };
+  Object.entries(map).forEach(([id, label]) => {
+    const section = document.getElementById(id);
+    if (!section) return;
+    const inner = section.querySelector('.section__inner');
+    if (!inner) return;
+    const el = document.createElement('div');
+    el.className = 'section-progress';
+    el.textContent = label;
+    inner.appendChild(el);
   });
 })();
