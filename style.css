@@ -161,13 +161,31 @@ body {
 .hero__institution {
   position: absolute;
   bottom: 1.5rem; left: 50%; transform: translateX(-50%);
-  display: flex; gap: 0.8rem; align-items: center;
+  display: flex; gap: 0.5rem; align-items: center;
   font-size: 0.65rem; letter-spacing: 0.12em;
   color: var(--clr-text-dim);
   white-space: nowrap;
   z-index: 2;
+  width: max-content;
+  max-width: 90vw;
 }
 .hero__institution .sep { color: var(--clr-neon); }
+
+@media (max-width: 600px) {
+  .hero__institution {
+    flex-direction: column;
+    gap: 0.25rem;
+    white-space: normal;
+    text-align: center;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    bottom: 5.5rem; /* above mobile nav */
+    width: 90vw;
+  }
+  .hero__institution .sep {
+    display: none;
+  }
+}
 
 /* ===========================
    SIDE NAV

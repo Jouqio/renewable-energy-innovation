@@ -9,28 +9,34 @@ dalam memperingati **Hari Bumi Sedunia 2026**, yang diselenggarakan oleh **STITE
 ## Konten Utama
 
 ### 01 · Krisis Energi & Lingkungan
+
 Mengulas empat ancaman utama yang mengintai keberlanjutan planet:
+
 - **Ketergantungan Energi Fosil** — lebih dari 80% energi dunia masih dari fosil
 - **Polusi Udara dan Air** — 7 juta kematian/tahun akibat polusi (WHO)
 - **Perubahan Iklim Global** — suhu bumi naik 1,1°C sejak era pra-industri
 - **Sumber Daya Makin Menipis** — cadangan minyak diperkirakan habis dalam 50–60 tahun
 
 ### 02 · Solusi Energi Terbarukan
+
 Tiga pilar energi bersih yang menjadi tumpuan masa depan Indonesia:
 
-| Sumber | Potensi Indonesia | Keunggulan |
-|--------|-------------------|------------|
-| ☀️ Energi Surya | **207.898 MW** | 0 emisi, umur panel 25+ tahun |
-| 💨 Energi Angin | **60.647 MW** | 98% lahan tetap bisa dipakai |
-| 💧 Energi Air | **94.000 MW** | Teknologi paling matang, baru 6% termanfaatkan |
+| Sumber          | Potensi Indonesia | Keunggulan                                     |
+| --------------- | ----------------- | ---------------------------------------------- |
+| ☀️ Energi Surya | **207.898 MW**    | 0 emisi, umur panel 25+ tahun                  |
+| 💨 Energi Angin | **60.647 MW**     | 98% lahan tetap bisa dipakai                   |
+| 💧 Energi Air   | **94.000 MW**     | Teknologi paling matang, baru 6% termanfaatkan |
 
 ### 03 · Inovasi Teknologi — Smart Energy System
+
 Tiga pilar inovasi digital untuk pengelolaan energi cerdas:
+
 - **IoT Monitoring** — pemantauan real-time dari sensor di seluruh infrastruktur energi
 - **AI Optimization** — prediksi produksi, penyeimbangan beban, dan pemeliharaan prediktif
 - **Smart Grid** — jaringan listrik cerdas yang mengurangi losses transmisi hingga 15%
 
 ### 04 · Dampak Positif Transisi Energi
+
 - Mengurangi emisi karbon nasional 30–40%
 - Udara bersih dan lingkungan lebih sehat
 - Akses listrik bagi ~2.500 desa terpencil
@@ -86,7 +92,6 @@ open index.html
 > Tidak memerlukan build tool, framework, atau dependensi tambahan — murni HTML, CSS, dan JavaScript.
 
 ---
-
 
 ## Penyelenggara
 
