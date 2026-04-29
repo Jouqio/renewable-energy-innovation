@@ -13,43 +13,29 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Reading progress bar -->
-    <div class="progress-bar" id="progressBar"></div>
+    <!-- READ PROGRESS BAR -->
+    <div class="read-progress" id="readProgress"></div>
 
-    <!-- Custom cursor -->
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-trail" id="cursorTrail"></div>
+    <!-- CURSOR GLOW -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
 
-    <!-- Mobile bottom nav -->
+
+
+    <!-- MOBILE NAV -->
+    <button class="mobile-nav-btn" id="mobileNavBtn" aria-label="Navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
     <nav class="mobile-nav" id="mobileNav">
-      <a href="#hero" class="mobile-nav__item" data-label="🏠">
-        <span class="mobile-nav__dot"></span>
-        <span class="mobile-nav__label">Beranda</span>
-      </a>
-      <a href="#section-01" class="mobile-nav__item" data-label="⛽">
-        <span class="mobile-nav__dot"></span>
-        <span class="mobile-nav__label">Krisis</span>
-      </a>
-      <a href="#section-02" class="mobile-nav__item" data-label="🌿">
-        <span class="mobile-nav__dot"></span>
-        <span class="mobile-nav__label">Solusi</span>
-      </a>
-      <a href="#section-03" class="mobile-nav__item" data-label="🤖">
-        <span class="mobile-nav__dot"></span>
-        <span class="mobile-nav__label">Inovasi</span>
-      </a>
-      <a href="#section-04" class="mobile-nav__item" data-label="✅">
-        <span class="mobile-nav__dot"></span>
-        <span class="mobile-nav__label">Dampak</span>
-      </a>
-      <a href="#section-facts" class="mobile-nav__item" data-label="📊">
-        <span class="mobile-nav__dot"></span>
-        <span class="mobile-nav__label">Fakta</span>
-      </a>
-      <a href="#section-cta" class="mobile-nav__item" data-label="⚡">
-        <span class="mobile-nav__dot"></span>
-        <span class="mobile-nav__label">Aksi</span>
-      </a>
+      <div class="mobile-nav__header">NAVIGASI</div>
+      <a href="#hero" class="mobile-nav__item" data-label="Beranda">🏠 Beranda</a>
+      <a href="#section-01" class="mobile-nav__item" data-label="Krisis Energi">⚠️ Krisis Energi</a>
+      <a href="#section-02" class="mobile-nav__item" data-label="Solusi Terbarukan">♻️ Solusi Terbarukan</a>
+      <a href="#section-03" class="mobile-nav__item" data-label="Inovasi Teknologi">🤖 Inovasi Teknologi</a>
+      <a href="#section-04" class="mobile-nav__item" data-label="Dampak Positif">🌱 Dampak Positif</a>
+      <a href="#section-facts" class="mobile-nav__item" data-label="Fakta Penting">📊 Fakta Penting</a>
+      <a href="#section-cta" class="mobile-nav__item" data-label="Aksi Nyata">⚡ Aksi Nyata</a>
     </nav>
     <!-- HERO -->
     <section class="hero" id="hero">
@@ -59,7 +45,7 @@
         <div class="hero__badge">SMART SOLUTION FOR A BETTER EARTH</div>
         <h1 class="hero__title">
           <span class="hero__title--line1">INOVASI</span>
-          <span class="hero__title--line2" id="typingTarget" data-text="ENERGI TERBARUKAN"></span>
+          <span class="hero__title--line2"><span class="typing-target" data-text="ENERGI TERBARUKAN"></span><span class="typing-cursor">|</span></span>
           <span class="hero__title--line3">UNTUK MASA DEPAN BERKELANJUTAN</span>
         </h1>
         <p class="hero__tagline">
@@ -71,20 +57,13 @@
           <div class="hero__scroll-arrow"></div>
         </div>
       </div>
-      <div class="hero__ticker"><div class="hero__ticker-track">
+      <div class="hero__institution">
         <span>KEMENDIKTISAINTEK</span>
         <span class="sep">×</span>
         <span>DIKTISAINTEK BERDAMPAK</span>
         <span class="sep">×</span>
         <span>STITEK BONTANG</span>
-        <span class="sep">×</span>
-        <span>KEMENDIKTISAINTEK</span>
-        <span class="sep">×</span>
-        <span>DIKTISAINTEK BERDAMPAK</span>
-        <span class="sep">×</span>
-        <span>STITEK BONTANG</span>
-        <span class="sep">×</span>
-      </div></div>
+      </div>
     </section>
 
     <!-- NAV PROGRESS -->
@@ -115,7 +94,7 @@
     </nav>
 
     <!-- SECTION 01 — KRISIS ENERGI -->
-    <section class="section section--crisis" id="section-01">
+    <section class="section section--crisis parallax-section" id="section-01" data-parallax-speed="0.3">
       <div class="section__inner">
         <div class="section__number" data-n="01">01</div>
         <div class="section__header">
@@ -215,7 +194,7 @@
     </section>
 
     <!-- SECTION 02 — SOLUSI ENERGI TERBARUKAN -->
-    <section class="section section--solution" id="section-02">
+    <section class="section section--solution parallax-section" id="section-02" data-parallax-speed="0.2">
       <div class="section__inner">
         <div class="section__number" data-n="02">02</div>
         <div class="section__header">
@@ -439,7 +418,7 @@
     </section>
 
     <!-- SECTION 03 — INOVASI TEKNOLOGI -->
-    <section class="section section--tech" id="section-03">
+    <section class="section section--tech parallax-section" id="section-03" data-parallax-speed="0.25">
       <div class="section__inner">
         <div class="section__number" data-n="03">03</div>
         <div class="section__header">
@@ -791,7 +770,7 @@
             diselenggarakan oleh <strong>STITEK Bontang</strong> sebagai wujud
             komitmen kampus dalam mendorong generasi muda untuk berkontribusi
             nyata terhadap keberlanjutan lingkungan dan masa depan energi
-            Indonesia. Semoga karya ini dapat menginspirasi lebih banyak orang untuk beraksi dan mendukung transisi energi bersih demi bumi yang lebih hijau dan berkelanjutan.
+            Indonesia.
           </p>
         </div>
       </div>
