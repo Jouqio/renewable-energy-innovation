@@ -843,6 +843,9 @@ body {
   font-family: var(--font-display); font-size: 0.6rem; letter-spacing: 0.12em;
   backdrop-filter: blur(12px);
   transition: var(--transition);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto !important;
 }
 .sound-toggle:hover { border-color: var(--clr-neon); color: var(--clr-neon); box-shadow: var(--glow-neon); }
 .sound-toggle.active { border-color: var(--clr-neon2); color: var(--clr-neon2); box-shadow: var(--glow-green); }
@@ -932,9 +935,24 @@ body {
 .reveal-up.in, .reveal-left.in, .reveal-right.in, .reveal-scale.in {
   opacity: 1; transform: none; pointer-events: auto;
 }
+/* On touch/mobile: immediately enable pointer-events after reveal triggers */
+@media (pointer: coarse) {
+  .reveal-up.in, .reveal-left.in, .reveal-right.in, .reveal-scale.in {
+    transition-delay: 0ms !important;
+    pointer-events: auto !important;
+  }
+  /* Also ensure cards never block touch even before .in class */
+  .tech-card, .crisis-card, .fact-card, .etab-btn, .sound-toggle {
+    pointer-events: auto !important;
+  }
+}
 
 /* ── PARALLAX SECTION ─────────────────────────────────── */
 .parallax-section { background-attachment: fixed; }
+@media (pointer: coarse), (max-width: 768px) {
+  /* background-attachment:fixed is broken on iOS/Android — disable it */
+  .parallax-section { background-attachment: scroll; }
+}
 .parallax-bg-layer {
   position: absolute; inset: -20%; pointer-events: none; z-index: 0;
   will-change: transform;
@@ -953,6 +971,8 @@ body {
 .tech-card {
   background: rgba(7, 20, 46, 0.6) !important;
   box-shadow: 0 4px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(0,229,255,0.08);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 .fact-card {
   background: rgba(15, 12, 5, 0.55) !important;

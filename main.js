@@ -258,6 +258,12 @@
       btn.querySelector('.sound-on').style.display = 'none';
     }
   });
+
+  // Mobile: touchend fires before click, prevents 300ms delay on iOS/Android
+  btn.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    btn.click();
+  }, { passive: false });
 })();
 
 
@@ -347,11 +353,20 @@
     });
   });
 
+  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const el = entry.target;
-      requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('in')));
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        el.classList.add('in');
+        // On touch devices: clear transition-delay after reveal so pointer-events activate immediately
+        if (isTouchDevice) {
+          const delay = parseFloat(el.style.transitionDelay) || 0;
+          setTimeout(() => { el.style.transitionDelay = '0ms'; }, delay + 50);
+        }
+      }));
       el.querySelectorAll('.bar-fill').forEach(b => b.classList.add('animated'));
       io.unobserve(el);
     });
@@ -407,7 +422,7 @@ function animateCounter(el, target) {
   document.head.appendChild(s);
 
   document.querySelectorAll('.etab-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    function activateTab(e) {
       e.stopPropagation();
       document.querySelectorAll('.etab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -418,7 +433,13 @@ function animateCounter(el, target) {
         t.style.animation = 'none';
         requestAnimationFrame(() => { t.style.animation = 'tabFadeIn 0.45s ease forwards'; });
       }
-    });
+    }
+    btn.addEventListener('click', activateTab);
+    // Mobile touchend for instant response
+    btn.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      activateTab(e);
+    }, { passive: false });
   });
 })();
 
@@ -426,6 +447,8 @@ function animateCounter(el, target) {
 // ─── PARALLAX BACKGROUNDS ────────────────────────────────────────────────────
 (function initParallax() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // Disable parallax on touch/mobile — background-attachment:fixed is broken there
+  if (window.matchMedia('(pointer: coarse)').matches) return;
   const sections = document.querySelectorAll('.parallax-section');
   if (!sections.length) return;
 
@@ -518,6 +541,8 @@ function animateCounter(el, target) {
 
 // ─── 3D CARD TILT ────────────────────────────────────────────────────────────
 (function initTilt() {
+  // Skip on touch devices — mouse tilt interferes with tap events
+  if (window.matchMedia('(pointer: coarse)').matches) return;
   document.querySelectorAll('.tech-card, .fact-card, .crisis-card').forEach(card => {
     let raf;
     card.addEventListener('mousemove', e => {
