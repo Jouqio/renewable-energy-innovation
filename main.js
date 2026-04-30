@@ -96,156 +96,166 @@
   const btn = document.getElementById('soundToggle');
   if (!btn) return;
 
-  let ctx = null, sources = null, gainNode = null, isPlaying = false;
+  let ctx = null, masterGain = null, allStarted = [], isPlaying = false;
 
-  function buildAudio(audioCtx) {
-    const sr = audioCtx.sampleRate;
-    const now = audioCtx.currentTime;
-    const allNodes = [];
+  function D(seconds, fill) {
+    // Helper: create stereo looping buffer
+    const buf = ctx.createBuffer(2, ctx.sampleRate * seconds, ctx.sampleRate);
+    for (let ch = 0; ch < 2; ch++) fill(buf.getChannelData(ch), ch);
+    const src = ctx.createBufferSource();
+    src.buffer = buf; src.loop = true;
+    return src;
+  }
 
-    // ── Master gain (fade in) ──────────────────────────────
-    gainNode = audioCtx.createGain();
-    gainNode.gain.setValueAtTime(0, now);
-    gainNode.gain.linearRampToValueAtTime(0.72, now + 3.5);
-    gainNode.connect(audioCtx.destination);
+  function G(val) {
+    const g = ctx.createGain(); g.gain.value = val; return g;
+  }
 
-    // ── Helper: connect chain ──────────────────────────────
-    function chain(src, ...nodes) {
-      let cur = src;
-      nodes.forEach(n => { cur.connect(n); cur = n; });
-      cur.connect(gainNode);
-      return src;
-    }
+  function F(type, freq, q) {
+    const f = ctx.createBiquadFilter();
+    f.type = type; f.frequency.value = freq;
+    if (q !== undefined) f.Q.value = q;
+    return f;
+  }
 
-    // ── Helper: make buffer source ─────────────────────────
-    function makeBuf(seconds, fill) {
-      const buf = audioCtx.createBuffer(2, sr * seconds, sr);
-      for (let ch = 0; ch < 2; ch++) fill(buf.getChannelData(ch), ch);
-      const src = audioCtx.createBufferSource();
-      src.buffer = buf; src.loop = true;
-      allNodes.push(src);
-      return src;
-    }
+  function OSC(type, freq) {
+    const o = ctx.createOscillator();
+    o.type = type; o.frequency.value = freq; return o;
+  }
 
-    // ── 1. DEEP SUB-BASS DRONE (40Hz) ─────────────────────
-    // Warm, felt-not-heard foundation like a power plant
-    const sub = audioCtx.createOscillator();
-    sub.type = 'sine'; sub.frequency.value = 40;
-    const subG = audioCtx.createGain(); subG.gain.value = 0.18;
-    const subFilter = audioCtx.createBiquadFilter();
-    subFilter.type = 'lowpass'; subFilter.frequency.value = 80;
-    chain(sub, subG, subFilter);
-    sub.start(); allNodes.push(sub);
+  function startAll() {
+    const now = ctx.currentTime;
 
-    // ── 2. ELECTRIC HUM 60Hz + harmonics ──────────────────
-    // Classic power grid hum
-    [60, 120, 180, 300].forEach((f, i) => {
-      const osc = audioCtx.createOscillator();
-      osc.type = i === 0 ? 'sine' : 'triangle';
-      osc.frequency.value = f;
-      const g = audioCtx.createGain();
-      g.gain.value = [0.06, 0.025, 0.010, 0.004][i];
-      chain(osc, g);
-      osc.start(); allNodes.push(osc);
+    // ── MASTER OUTPUT ─────────────────────────────────────
+    masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(0, now);
+    masterGain.gain.linearRampToValueAtTime(0.8, now + 3.0);
+    masterGain.connect(ctx.destination);
+
+    const out = masterGain; // shorthand
+
+    // ── LAYER 1: DEEP DRONE 55Hz (main hum) ──────────────
+    // Sine wave → lowpass → gain → out
+    const drone = OSC('sine', 55);
+    const droneF = F('lowpass', 120, 0.7);
+    const droneG = G(0.35);
+    drone.connect(droneF); droneF.connect(droneG); droneG.connect(out);
+    drone.start(); allStarted.push(drone);
+
+    // ── LAYER 2: ELECTRIC HUM 60Hz + 3 overtones ─────────
+    [[60, 'sine', 0.12], [120, 'triangle', 0.05], [180, 'sine', 0.02], [240, 'triangle', 0.008]].forEach(([f, type, gain]) => {
+      const o = OSC(type, f);
+      const g = G(gain);
+      o.connect(g); g.connect(out);
+      o.start(); allStarted.push(o);
     });
 
-    // ── 3. BROWN NOISE (rumble + texture) ─────────────────
-    const brownSrc = makeBuf(8, (data) => {
+    // ── LAYER 3: BROWN NOISE (low rumble) ─────────────────
+    const brown = D(8, (data) => {
       let last = 0;
       for (let i = 0; i < data.length; i++) {
-        const w = Math.random() * 2 - 1;
-        data[i] = last = Math.max(-1, Math.min(1, (last + 0.02 * w) / 1.02));
+        const w = (Math.random() * 2 - 1) * 0.5;
+        last = (last + 0.02 * w) / 1.02;
+        data[i] = Math.max(-1, Math.min(1, last * 3.5));
       }
     });
-    const brownLpf = audioCtx.createBiquadFilter();
-    brownLpf.type = 'lowpass'; brownLpf.frequency.value = 200; brownLpf.Q.value = 0.5;
-    const brownG = audioCtx.createGain(); brownG.gain.value = 0.09;
-    chain(brownSrc, brownLpf, brownG);
-    brownSrc.start();
+    const brownF = F('lowpass', 300, 0.5);
+    const brownG2 = G(0.18);
+    brown.connect(brownF); brownF.connect(brownG2); brownG2.connect(out);
+    brown.start(); allStarted.push(brown);
 
-    // ── 4. WIND TEXTURE (filtered white noise, slow LFO) ──
-    const windSrc = makeBuf(12, (data) => {
+    // ── LAYER 4: WIND (bandpass noise, LFO swell) ─────────
+    const wind = D(10, (data, ch) => {
+      for (let i = 0; i < data.length; i++)
+        data[i] = (Math.random() * 2 - 1) * (ch === 1 ? 0.9 : 1); // slight stereo difference
+    });
+    const windBP = F('bandpass', 800, 0.4);
+    const windG2 = G(0.06);
+    // LFO modulates wind volume (slow breath, ~12s cycle)
+    const windLfo = OSC('sine', 1 / 12);
+    const windLfoG = G(0.04);
+    windLfo.connect(windLfoG);
+    windLfoG.connect(windG2.gain);
+    wind.connect(windBP); windBP.connect(windG2); windG2.connect(out);
+    wind.start(); windLfo.start();
+    allStarted.push(wind, windLfo);
+
+    // ── LAYER 5: HIGH SHIMMER (solar hiss) ────────────────
+    const shimmer = D(5, (data) => {
       for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
     });
-    const windBpf = audioCtx.createBiquadFilter();
-    windBpf.type = 'bandpass'; windBpf.frequency.value = 600; windBpf.Q.value = 0.3;
-    const windG = audioCtx.createGain(); windG.gain.value = 0;
-    // LFO to slowly swell wind in & out
-    const windLfo = audioCtx.createOscillator();
-    windLfo.type = 'sine'; windLfo.frequency.value = 0.07; // ~14s cycle
-    const windLfoG = audioCtx.createGain(); windLfoG.gain.value = 0.028;
-    windLfo.connect(windLfoG); windLfoG.connect(windG.gain);
-    windG.gain.setValueAtTime(0.03, now);
-    chain(windSrc, windBpf, windG);
-    windSrc.start(); windLfo.start(); allNodes.push(windLfo);
+    const shimHP = F('highpass', 5000, 1.5);
+    const shimG = G(0.03);
+    shimmer.connect(shimHP); shimHP.connect(shimG); shimG.connect(out);
+    shimmer.start(); allStarted.push(shimmer);
 
-    // ── 5. HIGH-FREQ SHIMMER (solar panel hiss) ───────────
-    const shimmerSrc = makeBuf(6, (data) => {
-      for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * 0.5;
-    });
-    const shimmerHpf = audioCtx.createBiquadFilter();
-    shimmerHpf.type = 'highpass'; shimmerHpf.frequency.value = 4000; shimmerHpf.Q.value = 1.2;
-    const shimmerG = audioCtx.createGain(); shimmerG.gain.value = 0.022;
-    chain(shimmerSrc, shimmerHpf, shimmerG);
-    shimmerSrc.start();
+    // ── LAYER 6: SMART GRID PULSE TONE (528Hz) ────────────
+    // Sine at 528Hz, slow LFO tremolo every ~7s
+    const ping = OSC('sine', 528);
+    const pingG = G(0);
+    const pingLfo = OSC('sine', 1 / 7);
+    const pingLfoG = G(0.022);
+    pingLfo.connect(pingLfoG);
+    pingLfoG.connect(pingG.gain);
+    ping.connect(pingG); pingG.connect(out);
+    ping.start(); pingLfo.start();
+    allStarted.push(ping, pingLfo);
 
-    // ── 6. PULSING TONE (smart grid ping, 528Hz) ──────────
-    // Occasional soft "digital heartbeat" feel
-    const ping = audioCtx.createOscillator();
-    ping.type = 'sine'; ping.frequency.value = 528;
-    const pingEnv = audioCtx.createGain(); pingEnv.gain.value = 0;
-    // LFO that creates slow rhythmic swell every ~8s
-    const pingLfo = audioCtx.createOscillator();
-    pingLfo.type = 'sine'; pingLfo.frequency.value = 0.125;
-    const pingLfoG = audioCtx.createGain(); pingLfoG.gain.value = 0.018;
-    pingLfo.connect(pingLfoG); pingLfoG.connect(pingEnv.gain);
-    chain(ping, pingEnv);
-    ping.start(); pingLfo.start(); allNodes.push(ping, pingLfo);
+    // ── LAYER 7: SUB PULSE (40Hz heartbeat, slow) ─────────
+    const subPulse = OSC('sine', 40);
+    const subPulseG = G(0);
+    const subPulseLfo = OSC('sine', 1 / 4); // pulse every 4s
+    const subPulseLfoG = G(0.08);
+    subPulseLfo.connect(subPulseLfoG);
+    subPulseLfoG.connect(subPulseG.gain);
+    subPulse.connect(subPulseG); subPulseG.connect(out);
+    subPulse.start(); subPulseLfo.start();
+    allStarted.push(subPulse, subPulseLfo);
 
-    // ── 7. REVERB (convolution via feedback delay) ─────────
-    // Simple feedback delay for spaciousness
-    const delay = audioCtx.createDelay(2.0);
-    delay.delayTime.value = 0.45;
-    const feedback = audioCtx.createGain(); feedback.gain.value = 0.38;
-    const delayFilter = audioCtx.createBiquadFilter();
-    delayFilter.type = 'lowpass'; delayFilter.frequency.value = 1200;
-    const wetG = audioCtx.createGain(); wetG.gain.value = 0.22;
-    // Tap sub & ping into delay for spacious echo
-    subG.connect(delay);
-    pingEnv.connect(delay);
-    delay.connect(delayFilter);
-    delayFilter.connect(feedback);
-    feedback.connect(delay);
-    delayFilter.connect(wetG);
-    wetG.connect(gainNode);
+    // ── LAYER 8: FEEDBACK DELAY REVERB ────────────────────
+    const delay = ctx.createDelay(1.0);
+    delay.delayTime.value = 0.38;
+    const fbGain = G(0.32);
+    const delayLPF = F('lowpass', 1800);
+    const wetGain = G(0.28);
+    // Feed drone & ping into delay
+    droneG.connect(delay);
+    pingG.connect(delay);
+    delay.connect(delayLPF);
+    delayLPF.connect(fbGain);
+    fbGain.connect(delay); // feedback loop
+    delayLPF.connect(wetGain);
+    wetGain.connect(out);
+  }
 
-    // ── 8. STEREO WIDTH via small L/R offset ──────────────
-    const merger = audioCtx.createChannelMerger(2);
-    const splitter = audioCtx.createChannelSplitter(2);
-    // Note: main mix stays mono-ish for simplicity; width comes from the
-    // slight timing difference baked into the stereo brown noise buffer.
-
-    return { stop: () => allNodes.forEach(n => { try { n.stop(); } catch(e) {} }) };
+  function stopAll() {
+    if (!masterGain) return;
+    masterGain.gain.cancelScheduledValues(ctx.currentTime);
+    masterGain.gain.setValueAtTime(masterGain.gain.value, ctx.currentTime);
+    masterGain.gain.linearRampToValueAtTime(0, ctx.currentTime + 1.8);
+    setTimeout(() => {
+      allStarted.forEach(n => { try { n.stop(); } catch(e) {} });
+      allStarted = [];
+    }, 1900);
   }
 
   btn.addEventListener('click', () => {
     if (!isPlaying) {
-      if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
-      if (ctx.state === 'suspended') ctx.resume();
-      sources = buildAudio(ctx);
+      // Create fresh context on each play (avoids suspended state issues)
+      if (ctx) { try { ctx.close(); } catch(e) {} }
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      allStarted = [];
+      startAll();
       isPlaying = true;
       btn.classList.add('active');
       btn.querySelector('.sound-off').style.display = 'none';
-      btn.querySelector('.sound-on').style.display  = 'inline';
+      btn.querySelector('.sound-on').style.display = 'inline';
     } else {
-      gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + 1.5);
-      setTimeout(() => {
-        try { sources.stop(); } catch(e) {}
-      }, 1600);
+      stopAll();
       isPlaying = false;
       btn.classList.remove('active');
       btn.querySelector('.sound-off').style.display = 'inline';
-      btn.querySelector('.sound-on').style.display  = 'none';
+      btn.querySelector('.sound-on').style.display = 'none';
     }
   });
 })();
