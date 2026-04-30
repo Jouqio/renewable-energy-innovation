@@ -334,6 +334,7 @@
 (function initReveal() {
   const revealMap = [
     ['.section__header', 'reveal-up',    0  ],
+    ['.energy-tabs',     'reveal-up',    0  ],
     ['.crisis-card',     'reveal-up',    true],
     ['.tech-card',       'reveal-up',    true],
     ['.impact-item',     'reveal-left',  true],
@@ -434,11 +435,19 @@ function animateCounter(el, target) {
         requestAnimationFrame(() => { t.style.animation = 'tabFadeIn 0.45s ease forwards'; });
       }
     }
+    // Desktop click
     btn.addEventListener('click', activateTab);
-    // Mobile touchend for instant response
+    // Mobile touchend with preventDefault to stop 300ms delay
     btn.addEventListener('touchend', (e) => {
       e.preventDefault();
       activateTab(e);
+    }, { passive: false });
+    // Fallback for pointer events (for devices that support them)
+    btn.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'touch') {
+        e.preventDefault();
+        activateTab(e);
+      }
     }, { passive: false });
   });
 })();

@@ -297,12 +297,13 @@ body {
 .section--solution {
   background: linear-gradient(180deg, #080f22 0%, #051810 50%, #080f22 100%);
 }
-.energy-tabs { position: relative; z-index: 10; }
+.energy-tabs { position: relative; z-index: 10; pointer-events: auto !important; }
 .energy-tab-btns {
   display: flex; gap: 1rem; margin-bottom: 2.5rem;
   flex-wrap: wrap;
   position: relative;
   z-index: 5;
+  pointer-events: auto !important;
 }
 .etab-btn {
   font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 0.1em;
@@ -313,6 +314,8 @@ body {
   position: relative; z-index: 5;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+  pointer-events: auto !important;
+  user-select: none;
 }
 .etab-btn:hover { border-color: var(--clr-neon2); color: var(--clr-neon2); }
 .etab-btn.active {
@@ -320,8 +323,8 @@ body {
   border-color: var(--clr-neon2); color: var(--clr-neon2);
   box-shadow: var(--glow-green);
 }
-.energy-tab-content { }
-.energy-tab-content.hidden { display: none; }
+.energy-tab-content { pointer-events: auto !important; }
+.energy-tab-content.hidden { display: none; pointer-events: none; }
 
 .energy-detail {
   display: grid; grid-template-columns: 280px 1fr; gap: 3rem; align-items: start;
@@ -944,6 +947,21 @@ body {
   /* Also ensure cards never block touch even before .in class */
   .tech-card, .crisis-card, .fact-card, .etab-btn, .sound-toggle {
     pointer-events: auto !important;
+  }
+}
+
+/* ── MOBILE TOUCH OPTIMIZATION FOR ENERGY TABS ──────────────── */
+@media (pointer: coarse), (max-width: 768px) {
+  .energy-tabs,
+  .energy-tab-btns,
+  .etab-btn {
+    pointer-events: auto !important;
+  }
+  .etab-btn {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.8rem 2rem;
+    font-size: 0.85rem;
   }
 }
 
