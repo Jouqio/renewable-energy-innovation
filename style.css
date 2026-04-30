@@ -297,10 +297,12 @@ body {
 .section--solution {
   background: linear-gradient(180deg, #080f22 0%, #051810 50%, #080f22 100%);
 }
-.energy-tabs { }
+.energy-tabs { position: relative; z-index: 10; }
 .energy-tab-btns {
   display: flex; gap: 1rem; margin-bottom: 2.5rem;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 5;
 }
 .etab-btn {
   font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 0.1em;
@@ -308,6 +310,9 @@ body {
   border: 1px solid var(--clr-surface2);
   background: var(--clr-surface); color: var(--clr-text-dim);
   cursor: pointer; transition: var(--transition);
+  position: relative; z-index: 5;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 .etab-btn:hover { border-color: var(--clr-neon2); color: var(--clr-neon2); }
 .etab-btn.active {
@@ -321,7 +326,21 @@ body {
 .energy-detail {
   display: grid; grid-template-columns: 280px 1fr; gap: 3rem; align-items: start;
 }
-@media(max-width:768px) { .energy-detail { grid-template-columns: 1fr; } }
+@media(max-width:768px) {
+  .energy-detail {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+  .energy-detail__visual {
+    order: 2; /* visual goes BELOW the text/buttons on mobile */
+    width: 200px !important;
+    height: 200px !important;
+    margin: 0 auto;
+  }
+  .energy-detail__text {
+    order: 1; /* text/content goes ABOVE visual on mobile */
+  }
+}
 
 .energy-detail__visual {
   width: 280px; height: 280px;
@@ -906,12 +925,12 @@ body {
 .typing-cursor.done { display: none; }
 
 /* ── SCROLL REVEAL — ENHANCED ─────────────────────────── */
-.reveal-up     { opacity: 0; transform: translateY(40px) scale(0.98); transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1); }
-.reveal-left   { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1); }
-.reveal-right  { opacity: 0; transform: translateX(40px); transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1); }
-.reveal-scale  { opacity: 0; transform: scale(0.9); transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1); }
+.reveal-up     { opacity: 0; transform: translateY(40px) scale(0.98); transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1); pointer-events: none; }
+.reveal-left   { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1); pointer-events: none; }
+.reveal-right  { opacity: 0; transform: translateX(40px); transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1); pointer-events: none; }
+.reveal-scale  { opacity: 0; transform: scale(0.9); transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1); pointer-events: none; }
 .reveal-up.in, .reveal-left.in, .reveal-right.in, .reveal-scale.in {
-  opacity: 1; transform: none;
+  opacity: 1; transform: none; pointer-events: auto;
 }
 
 /* ── PARALLAX SECTION ─────────────────────────────────── */
