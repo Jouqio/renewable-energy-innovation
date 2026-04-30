@@ -334,7 +334,6 @@
     ['.fact-card',       'reveal-scale', true],
     ['.fe-item',         'reveal-up',    true],
     ['.cta-action',      'reveal-up',    true],
-    ['.energy-tab-btns', 'reveal-up',    0   ],
     ['.crisis-visual',   'reveal-up',    0   ],
     ['.tech-diagram',    'reveal-scale', 0   ],
   ];
@@ -399,16 +398,26 @@ function animateCounter(el, target) {
 // ─── ENERGY TABS ─────────────────────────────────────────────────────────────
 (function initTabs() {
   const s = document.createElement('style');
-  s.textContent = `@keyframes tabFadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}`;
+  s.textContent = `
+    @keyframes tabFadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+    .etab-btn { pointer-events: auto !important; cursor: pointer !important; position: relative; z-index: 10; }
+    .energy-tab-btns { pointer-events: auto !important; }
+    .reveal-up.in, .reveal-left.in, .reveal-right.in, .reveal-scale.in { pointer-events: auto; }
+  `;
   document.head.appendChild(s);
 
   document.querySelectorAll('.etab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
       document.querySelectorAll('.etab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       document.querySelectorAll('.energy-tab-content').forEach(c => c.classList.add('hidden'));
       const t = document.getElementById('tab-' + btn.dataset.tab);
-      if (t) { t.classList.remove('hidden'); t.style.animation = 'none'; requestAnimationFrame(() => { t.style.animation = 'tabFadeIn 0.45s ease forwards'; }); }
+      if (t) {
+        t.classList.remove('hidden');
+        t.style.animation = 'none';
+        requestAnimationFrame(() => { t.style.animation = 'tabFadeIn 0.45s ease forwards'; });
+      }
     });
   });
 })();

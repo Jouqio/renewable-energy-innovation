@@ -822,6 +822,23 @@ body {
 }
 @media (pointer: coarse) { .cursor-glow, .cursor-dot { display: none; } }
 
+/* ── SOUND TOGGLE ─────────────────────────────────────── */
+.sound-toggle {
+  position: fixed; bottom: 2rem; left: 2rem; z-index: 500;
+  display: flex; align-items: center; gap: 0.5rem;
+  background: rgba(11,30,66,0.8);
+  border: 1px solid rgba(0,229,255,0.25);
+  border-radius: 999px; padding: 0.5rem 1rem;
+  cursor: pointer; color: var(--clr-text-dim);
+  font-family: var(--font-display); font-size: 0.6rem; letter-spacing: 0.12em;
+  backdrop-filter: blur(12px);
+  transition: var(--transition);
+}
+.sound-toggle:hover { border-color: var(--clr-neon); color: var(--clr-neon); box-shadow: var(--glow-neon); }
+.sound-toggle.active { border-color: var(--clr-neon2); color: var(--clr-neon2); box-shadow: var(--glow-green); }
+.sound-toggle__icon { font-size: 1rem; }
+@media (max-width: 768px) { .sound-toggle { bottom: 5.5rem; left: 1rem; padding: 0.4rem 0.8rem; font-size: 0.55rem; } }
+
 /* ── MOBILE NAV ───────────────────────────────────────── */
 .mobile-nav-btn {
   display: none;
@@ -991,4 +1008,66 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: gradientSlide 4s linear infinite;
+}
+/* ── MARQUEE TICKER ───────────────────────────────────────── */
+.marquee-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 490;
+  height: 36px;
+  background: rgba(5, 13, 30, 0.92);
+  border-top: 1px solid rgba(0, 229, 255, 0.18);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+  animation: marqueeScroll 22s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+.marquee-item {
+  display: inline-block;
+  padding: 0 2.5rem;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--clr-neon);
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+}
+
+.marquee-item:nth-child(6n+3),
+.marquee-item:nth-child(6n+6),
+.marquee-item:nth-child(6n+9) {
+  color: var(--clr-neon2);
+  text-shadow: 0 0 10px rgba(57, 255, 20, 0.6);
+}
+
+.marquee-sep {
+  display: inline-block;
+  color: rgba(245, 196, 0, 0.6);
+  font-size: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Ensure marquee doesn't overlap sound toggle on mobile */
+@media (max-width: 768px) {
+  .sound-toggle { bottom: 3rem; }
+  .scroll-top   { bottom: 3rem; }
 }
