@@ -158,15 +158,6 @@ body {
 }
 @keyframes bounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(8px)} }
 
-.hero__institution {
-  position: absolute;
-  bottom: 1.5rem; left: 50%; transform: translateX(-50%);
-  display: flex; gap: 0.8rem; align-items: center;
-  font-size: 0.65rem; letter-spacing: 0.12em;
-  color: var(--clr-text-dim);
-  white-space: nowrap;
-  z-index: 2;
-}
 .hero__institution .sep { color: var(--clr-neon); }
 
 /* ===========================
@@ -1051,14 +1042,13 @@ body {
 }
 
 .marquee-logo {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
   border-radius: 50%;
-  filter: drop-shadow(0 0 6px rgba(0,229,255,0.4));
+  background: rgba(255,255,255,0.08);
+  filter: drop-shadow(0 0 6px rgba(0,229,255,0.5));
   flex-shrink: 0;
-  /* Remove black background from logos */
-  mix-blend-mode: normal;
 }
 
 /* STITEK has black bg — use lighter treatment */
@@ -1111,21 +1101,32 @@ body {
 
 /* ── HERO INSTITUTION LOGOS ───────────────────────────────── */
 .hero__institution {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.2rem;
-  flex-wrap: wrap;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s 1.5s forwards;
 }
 
 .hero__inst-logo {
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
+  background: rgba(255,255,255,0.08);
   border-radius: 50%;
-  filter: drop-shadow(0 0 10px rgba(0,229,255,0.45)) brightness(1.05);
+  padding: 3px;
+  filter: drop-shadow(0 0 10px rgba(0,229,255,0.5)) brightness(1.05);
   transition: transform 0.3s ease, filter 0.3s ease;
   cursor: default;
+  flex-shrink: 0;
 }
 
 .hero__inst-logo:hover {
@@ -1134,8 +1135,22 @@ body {
 }
 
 .hero__institution .sep {
-  color: rgba(0,229,255,0.35);
-  font-size: 0.9rem;
+  color: rgba(0,229,255,0.3);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .hero__institution {
+    bottom: 3.5rem; /* above marquee bar */
+    gap: 0.7rem;
+  }
+  .hero__inst-logo {
+    width: 38px;
+    height: 38px;
+    padding: 2px;
+  }
+  .hero__institution .sep { font-size: 0.65rem; }
 }
 
 /* ── CTA LOGOS ────────────────────────────────────────────── */
@@ -1149,11 +1164,13 @@ body {
 }
 
 .cta__logo {
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
+  background: rgba(255,255,255,0.07);
   border-radius: 50%;
-  filter: drop-shadow(0 0 12px rgba(0,229,255,0.4)) brightness(1.05);
+  padding: 5px;
+  filter: drop-shadow(0 0 14px rgba(0,229,255,0.45)) brightness(1.05);
   transition: transform 0.35s cubic-bezier(.22,1,.36,1), filter 0.35s ease;
   cursor: default;
 }
