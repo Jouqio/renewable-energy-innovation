@@ -2,8 +2,6 @@
 
 Poster digital interaktif ini membahas secara komprehensif tentang **inovasi energi terbarukan** sebagai solusi nyata terhadap krisis energi dan lingkungan yang dihadapi dunia — khususnya Indonesia. Konten disajikan dalam format web scrollable yang informatif, visual, dan mudah dipahami oleh berbagai kalangan.
 
-Live demo GitHub Pages: https://syauqinzul.github.io/renewable-energy-innovation/
-
 dalam memperingati **Hari Bumi Sedunia 2026**, yang diselenggarakan oleh **STITEK Bontang** — sebagai wujud komitmen kampus dalam mendorong generasi muda untuk berkontribusi nyata terhadap keberlanjutan lingkungan dan masa depan energi Indonesia.
 
 ---
