@@ -1114,6 +1114,25 @@ a { text-decoration: none; color: inherit; }
   .navbar__links { display: none; }
   .navbar__hamburger { display: flex; }
 
+  /* Navbar container mobile fix */
+  .navbar__container {
+    padding: 0 16px;
+    gap: 8px;
+  }
+
+  .navbar__logos {
+    flex: 1;
+    gap: 8px;
+    overflow: hidden;
+  }
+
+  .navbar__logo {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
   .hero {
     flex-direction: column;
     text-align: center;
@@ -1206,7 +1225,16 @@ a { text-decoration: none; color: inherit; }
     font-size: clamp(3rem, 15vw, 5rem);
   }
 
+  /* Di HP kecil: sembunyikan logo ber-class hide-sm, sisakan 1 logo */
+  .navbar__logo--hide-sm {
+    display: none;
+  }
+
   .navbar__logo {
     height: 28px;
+  }
+
+  .navbar__logos {
+    gap: 6px;
   }
 }
