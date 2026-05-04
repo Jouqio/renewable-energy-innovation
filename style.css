@@ -1235,6 +1235,6 @@ a { text-decoration: none; color: inherit; }
   }
 
   .navbar__logos {
-    gap: 6px;
+    gap: 5px;
   }
 }
