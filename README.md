@@ -54,38 +54,13 @@ Tiga pilar inovasi digital untuk pengelolaan energi cerdas:
 
 ---
 
-## Teknologi yang Digunakan
-
-- **HTML5** — struktur konten semantik
-- **CSS3** — animasi, layout responsif, dan visual modern
-- **JavaScript (Vanilla)** — interaktivitas dan animasi counter
-- **GitHub Pages** — hosting gratis dan deployment otomatis
-
----
-
-## Struktur Proyek
-
-```
-renewable-energy-innovation/
-├── foto/
-│   └── foto ganteng.jpg        # Foto profil pembuat
-├── logo/
-│   ├── Logo_Kemendiktisaintek.png
-│   ├── Logo_Diktisaintek_Berdampak.png
-│   └── Logo_STITEK_Bontang.png
-├── index.html                  # Struktur halaman utama
-├── style.css                   # Styling & responsive design
-├── main.js                     # Interaksi & animasi JavaScript
-└── README.md
-
-```
-
 ---
 
 ## Lisensi
 
 Proyek ini dibuat untuk keperluan edukasi dan non-komersial dalam rangka Hari Bumi Sedunia 2026.
 
+---
 ---
 
 #  Masa Depan Bumi — Inovasi Energi Terbarukan
