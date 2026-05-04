@@ -1,172 +1,221 @@
-/* ========================================
-   main.js – Inovasi Energi Terbarukan
-   STITEK Bontang · Clean · Lightweight
-   ======================================== */
+/* ================================
+   MAIN.JS — Renewable Energy Website
+   Syauqi Nuzul Abdi · STITEK Bontang
+================================ */
 
-(function () {
-  'use strict';
+document.addEventListener('DOMContentLoaded', () => {
 
-  /* ---- NAVBAR ---- */
-  const navbar   = document.getElementById('navbar');
-  const navToggle = document.getElementById('navToggle');
-  const navMenu  = document.getElementById('navMenu');
+  // ─── Read Progress Bar ───
+  const readProgress = document.getElementById('readProgress');
+  const updateProgress = () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    if (readProgress) readProgress.style.width = pct + '%';
+  };
+  window.addEventListener('scroll', updateProgress, { passive: true });
 
-  // Scroll shadow
-  window.addEventListener('scroll', function () {
-    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  // ─── Navbar scroll behavior ───
+  const navbar = document.getElementById('navbar');
+  const handleNavbar = () => {
+    if (navbar) {
+      if (window.scrollY > 60) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }
+  };
+  window.addEventListener('scroll', handleNavbar, { passive: true });
+  handleNavbar();
+
+  // ─── Hamburger / Mobile Menu ───
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+
+  const openMenu = () => {
+    hamburger?.classList.add('active');
+    mobileMenu?.classList.add('active');
+    mobileOverlay?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeMenu = () => {
+    hamburger?.classList.remove('active');
+    mobileMenu?.classList.remove('active');
+    mobileOverlay?.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  hamburger?.addEventListener('click', () => {
+    if (mobileMenu?.classList.contains('active')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  mobileOverlay?.addEventListener('click', closeMenu);
+
+  // Close menu on mobile link click
+  document.querySelectorAll('.mobile-menu__link').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // ─── Scroll To Top ───
+  const scrollTopBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    if (scrollTopBtn) {
+      if (window.scrollY > 400) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }
   }, { passive: true });
 
-  // Mobile toggle
-  if (navToggle && navMenu) {
-    navToggle.addEventListener('click', function () {
-      const isOpen = navMenu.classList.toggle('open');
-      navToggle.classList.toggle('open', isOpen);
-      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  scrollTopBtn?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ─── AOS Scroll Animations ───
+  const aosElements = document.querySelectorAll('[data-aos]');
+
+  const aosObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // Stagger delay for grid children
+        const delay = entry.target.closest('.cards-grid, .dampak-grid, .progress-grid')
+          ? Array.from(entry.target.parentElement.children).indexOf(entry.target) * 100
+          : 0;
+        setTimeout(() => {
+          entry.target.classList.add('aos-animate');
+        }, delay);
+        aosObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  aosElements.forEach(el => aosObserver.observe(el));
+
+  // ─── Progress Bar Animations (count up) ───
+  const progressCards = document.querySelectorAll('.progress-card');
+
+  const progressObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fill = entry.target.querySelector('.progress-card__fill');
+        const valueEl = entry.target.querySelector('.progress-card__value');
+
+        if (fill) {
+          const target = parseInt(fill.dataset.target) || 70;
+          fill.style.width = target + '%';
+        }
+
+        if (valueEl) {
+          const countTarget = parseInt(valueEl.dataset.count) || 0;
+          const suffix = valueEl.dataset.suffix || '%';
+          animateCount(valueEl, 0, countTarget, 1600, suffix);
+        }
+
+        progressObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  progressCards.forEach(card => progressObserver.observe(card));
+
+  function animateCount(el, from, to, duration, suffix) {
+    const start = performance.now();
+    const isLargeNum = to > 1000;
+
+    const step = (now) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // ease out cubic
+      const current = Math.round(from + (to - from) * eased);
+
+      if (suffix === '%') {
+        el.textContent = current + '%';
+      } else {
+        el.textContent = current.toLocaleString('id-ID') + suffix;
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    };
+
+    requestAnimationFrame(step);
+  }
+
+  // ─── Split Earth Hover Interactivity ───
+  const globe = document.querySelector('.split-earth__globe');
+  if (globe) {
+    globe.addEventListener('mousemove', (e) => {
+      const rect = globe.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      globe.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 6}deg)`;
     });
 
-    // Close menu when a link is clicked
-    navMenu.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        navMenu.classList.remove('open');
-        navToggle.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
+    globe.addEventListener('mouseleave', () => {
+      globe.style.transform = 'perspective(600px) rotateY(0) rotateX(0)';
+      globe.style.transition = 'transform 0.5s ease';
+    });
+
+    globe.addEventListener('mouseenter', () => {
+      globe.style.transition = 'transform 0.1s ease';
     });
   }
 
-  /* ---- SMOOTH SCROLL (for older browsers) ---- */
-  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    anchor.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href').slice(1);
-      const target = document.getElementById(targetId);
+  // ─── Smooth scroll for anchor links ───
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      const target = document.querySelector(anchor.getAttribute('href'));
       if (target) {
         e.preventDefault();
-        const navH = parseInt(getComputedStyle(document.documentElement)
-          .getPropertyValue('--nav-h')) || 72;
-        const top = target.getBoundingClientRect().top + window.scrollY - navH;
-        window.scrollTo({ top: top, behavior: 'smooth' });
+        const offset = 72; // navbar height
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
       }
     });
   });
 
-  /* ---- INTERSECTION OBSERVER — Fade-in cards ---- */
-  const fadeEls = document.querySelectorAll(
-    '.challenge-card, .solusi-card, .dampak-item'
-  );
+  // ─── Active navbar link highlight ───
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.navbar__link');
 
-  if ('IntersectionObserver' in window) {
-    const fadeObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          const delay = parseInt(entry.target.dataset.delay) || 0;
-          setTimeout(function () {
-            entry.target.classList.add('visible');
-          }, delay);
-          fadeObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    fadeEls.forEach(function (el) { fadeObserver.observe(el); });
-  } else {
-    // Fallback: show all immediately
-    fadeEls.forEach(function (el) { el.classList.add('visible'); });
-  }
-
-  /* ---- PROGRESS BARS + COUNTER ANIMATION ---- */
-  const progressSection = document.getElementById('progress');
-  let progressAnimated = false;
-
-  function animateValue(el, start, end, duration) {
-    const range  = end - start;
-    const step   = Math.max(10, Math.floor(duration / range));
-    let current  = start;
-    const timer  = setInterval(function () {
-      current += Math.ceil(range / (duration / step));
-      if (current >= end) {
-        current = end;
-        clearInterval(timer);
-      }
-      el.textContent = current.toLocaleString('id-ID');
-    }, step);
-  }
-
-  function runProgressAnimations() {
-    if (progressAnimated) return;
-    progressAnimated = true;
-
-    // Animate progress bars
-    document.querySelectorAll('.progress-bar').forEach(function (bar) {
-      const w = bar.dataset.width || 0;
-      setTimeout(function () { bar.style.width = w + '%'; }, 200);
-    });
-
-    // Animate counters
-    document.querySelectorAll('.stat-value').forEach(function (el) {
-      const target = parseInt(el.dataset.target) || 0;
-      animateValue(el, 0, target, 1800);
-    });
-  }
-
-  if ('IntersectionObserver' in window && progressSection) {
-    const progObserver = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) {
-        runProgressAnimations();
-        progObserver.disconnect();
-      }
-    }, { threshold: 0.2 });
-    progObserver.observe(progressSection);
-  } else {
-    // Fallback on scroll
-    window.addEventListener('scroll', function handler() {
-      if (progressSection) {
-        const rect = progressSection.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.8) {
-          runProgressAnimations();
-          window.removeEventListener('scroll', handler);
-        }
-      }
-    }, { passive: true });
-  }
-
-  /* ---- ACTIVE NAV LINK HIGHLIGHT on scroll ---- */
-  const sections  = document.querySelectorAll('section[id]');
-  const navLinks  = document.querySelectorAll('.nav-menu a[href^="#"]');
-
-  function setActiveLink() {
-    const scrollY = window.scrollY;
-    const navH = parseInt(getComputedStyle(document.documentElement)
-      .getPropertyValue('--nav-h')) || 72;
-
-    let currentId = '';
-    sections.forEach(function (section) {
-      const top = section.offsetTop - navH - 20;
-      if (scrollY >= top) {
-        currentId = section.id;
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.style.fontWeight = link.getAttribute('href') === '#' + entry.target.id ? '700' : '500';
+          link.style.color = link.getAttribute('href') === '#' + entry.target.id ? 'var(--green-dark)' : '';
+        });
       }
     });
+  }, { threshold: 0.4 });
 
-    navLinks.forEach(function (link) {
-      link.style.fontWeight = link.getAttribute('href') === '#' + currentId ? '900' : '';
-      link.style.color = link.getAttribute('href') === '#' + currentId
-        ? 'var(--green-dark)' : '';
+  sections.forEach(s => sectionObserver.observe(s));
+
+  // ─── Card hover: subtle tilt ───
+  document.querySelectorAll('.card, .dampak-item, .tech-node').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `translateY(-4px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg)`;
     });
-  }
 
-  window.addEventListener('scroll', setActiveLink, { passive: true });
-
-  /* ---- EARTH EMOJI: pause rotation on hover ---- */
-  const earthEmoji = document.querySelector('.earth-emoji');
-  if (earthEmoji) {
-    earthEmoji.addEventListener('mouseenter', function () {
-      earthEmoji.style.animationPlayState = 'paused';
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
     });
-    earthEmoji.addEventListener('mouseleave', function () {
-      earthEmoji.style.animationPlayState = 'running';
-    });
-  }
+  });
 
-  /* ---- INIT ---- */
-  setActiveLink();
-
-})();
+  console.log('🌿 Renewable Energy Website — Loaded. Syauqi Nuzul Abdi · STITEK Bontang');
+});
