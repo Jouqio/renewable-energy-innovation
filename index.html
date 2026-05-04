@@ -3,355 +3,522 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inovasi Energi Terbarukan – STITEK Bontang</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Masa Depan Bumi — Inovasi Energi Terbarukan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&family=Space+Mono:wght@700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ========== NAVBAR ========== -->
+  <!-- READ PROGRESS -->
+  <div class="read-progress" id="readProgress"></div>
+
+  <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
-    <div class="nav-inner">
-      <div class="nav-logos">
-        <img src="Logo_Kemendiktisaintek.png" alt="Kemendiktisaintek" class="nav-logo" />
-        <img src="Logo_Diktisaintek_Berdampak.png" alt="Diktisaintek" class="nav-logo" />
-        <img src="Logo_STITEK_Bontang.png" alt="STITEK" class="nav-logo" />
+    <div class="navbar__container">
+      <div class="navbar__logos">
+        <img src="Logo_Kemendiktisaintek.png" alt="Kemendiktisaintek" class="navbar__logo" />
+        <img src="Logo_Diktisaintek_Berdampak.png" alt="Diktisaintek Berdampak" class="navbar__logo" />
+        <img src="Logo_STITEK_Bontang.png" alt="STITEK Bontang" class="navbar__logo" />
       </div>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <div class="navbar__links">
+        <a href="#hero" class="navbar__link">Beranda</a>
+        <a href="#tantangan" class="navbar__link">Tantangan</a>
+        <a href="#solusi" class="navbar__link">Solusi</a>
+        <a href="#dampak" class="navbar__link">Dampak</a>
+        <a href="#profil" class="navbar__link">Profil</a>
+      </div>
+      <button class="navbar__hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="#tantangan">Tantangan</a></li>
-        <li><a href="#split">Masa Depan</a></li>
-        <li><a href="#solusi">Solusi</a></li>
-        <li><a href="#teknologi">Teknologi</a></li>
-        <li><a href="#dampak">Dampak</a></li>
-        <li><a href="#cta" class="nav-cta">Bergabung</a></li>
-      </ul>
     </div>
   </nav>
 
-  <!-- ========== HERO ========== -->
-  <section class="hero" id="hero">
-    <div class="hero-bg">
-      <div class="leaf leaf-1">🌿</div>
-      <div class="leaf leaf-2">🌱</div>
-      <div class="leaf leaf-3">🍃</div>
-      <div class="leaf leaf-4">🌿</div>
-    </div>
-    <div class="hero-content">
-      <span class="hero-badge">Smart Solution for a Better Earth</span>
-      <h1 class="hero-title">
-        <span class="hero-top">MASA DEPAN</span>
-        <span class="hero-bumi">BUMI</span>
-        <span class="hero-sub">DITENTUKAN HARI INI</span>
-      </h1>
-      <p class="hero-tagline">Inovasi Energi Terbarukan</p>
-      <p class="hero-quote">"Teknologi hijau hari ini, kehidupan berkelanjutan untuk generasi esok."</p>
-      <a href="#split" class="hero-scroll">
-        <span>Gulir untuk menjelajahi</span>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M10 3v14M4 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-  </section>
-
-  <!-- ========== TICKER ========== -->
-  <div class="ticker-wrap">
-    <div class="ticker">
-      <span>🌍 Dalam Rangka Memperingati Hari Bumi Sedunia 2026</span>
-      <span>⚡ Energi Terbarukan dapat Mengurangi Emisi CO₂ hingga 70%</span>
-      <span>🌊 Indonesia Memiliki Potensi Energi Terbarukan lebih dari 3.600 GW</span>
-      <span>💼 Transisi Energi Bersih dapat Menciptakan Jutaan Lapangan Kerja Baru</span>
-      <span>🌍 Dalam Rangka Memperingati Hari Bumi Sedunia 2026</span>
-      <span>⚡ Energi Terbarukan dapat Mengurangi Emisi CO₂ hingga 70%</span>
-      <span>🌊 Indonesia Memiliki Potensi Energi Terbarukan lebih dari 3.600 GW</span>
-      <span>💼 Transisi Energi Bersih dapat Menciptakan Jutaan Lapangan Kerja Baru</span>
-    </div>
+  <!-- MOBILE NAV OVERLAY -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#hero" class="mobile-menu__link">🏠 Beranda</a>
+    <a href="#tantangan" class="mobile-menu__link">⚠️ Tantangan</a>
+    <a href="#solusi" class="mobile-menu__link">🌿 Solusi</a>
+    <a href="#dampak" class="mobile-menu__link">🌱 Dampak</a>
+    <a href="#profil" class="mobile-menu__link">👤 Profil</a>
   </div>
 
-  <!-- ========== TANTANGAN ========== -->
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero__bg-leaves">
+      <div class="leaf leaf--1"></div>
+      <div class="leaf leaf--2"></div>
+      <div class="leaf leaf--3"></div>
+    </div>
+
+    <div class="hero__content">
+      <div class="hero__badge">🌍 Inovasi Energi Terbarukan</div>
+      <h1 class="hero__title">
+        MASA DEPAN<br/>
+        <span class="hero__title--bumi">BUMI</span><br/>
+        <span class="hero__title--sub">DITENTUKAN HARI INI</span>
+      </h1>
+      <p class="hero__desc">Teknologi hijau hari ini, kehidupan berkelanjutan untuk generasi esok.</p>
+      <div class="hero__actions">
+        <a href="#tantangan" class="btn btn--primary">Mulai Sekarang</a>
+        <a href="#solusi" class="btn btn--ghost">Lihat Solusi</a>
+      </div>
+    </div>
+
+    <!-- SPLIT EARTH -->
+    <div class="split-earth">
+      <div class="split-earth__globe">
+        <div class="split-earth__half split-earth__half--left">
+          <div class="split-earth__pollution">
+            <svg viewBox="0 0 200 300" class="split-earth__svg">
+              <!-- Factory/pollution side -->
+              <rect x="40" y="180" width="30" height="80" fill="#5d4037" rx="2"/>
+              <rect x="90" y="160" width="35" height="100" fill="#4e342e" rx="2"/>
+              <rect x="140" y="195" width="25" height="65" fill="#5d4037" rx="2"/>
+              <!-- Chimneys -->
+              <rect x="48" y="160" width="14" height="25" fill="#6d4c41" rx="2"/>
+              <rect x="99" y="138" width="16" height="28" fill="#5d4037" rx="2"/>
+              <rect x="147" y="178" width="12" height="22" fill="#6d4c41" rx="2"/>
+              <!-- Smoke clouds -->
+              <ellipse cx="55" cy="148" rx="18" ry="12" fill="rgba(100,100,100,0.7)"/>
+              <ellipse cx="42" cy="138" rx="14" ry="10" fill="rgba(80,80,80,0.6)"/>
+              <ellipse cx="68" cy="132" rx="16" ry="11" fill="rgba(90,90,90,0.65)"/>
+              <ellipse cx="107" cy="122" rx="20" ry="14" fill="rgba(100,100,100,0.7)"/>
+              <ellipse cx="93" cy="110" rx="16" ry="11" fill="rgba(80,80,80,0.6)"/>
+              <ellipse cx="122" cy="108" rx="18" ry="12" fill="rgba(90,90,90,0.65)"/>
+              <ellipse cx="153" cy="162" rx="15" ry="10" fill="rgba(100,100,100,0.6)"/>
+              <!-- Cracked ground -->
+              <path d="M0 240 Q50 235 100 242 Q150 248 200 240" stroke="#8d6e63" stroke-width="2" fill="none"/>
+              <path d="M20 260 L40 250 L60 265 L80 255" stroke="#795548" stroke-width="1.5" fill="none"/>
+              <path d="M120 258 L145 248 L165 262" stroke="#795548" stroke-width="1.5" fill="none"/>
+              <!-- Dark sky -->
+              <rect x="0" y="0" width="200" height="200" fill="rgba(70,60,50,0.3)" rx="0"/>
+            </svg>
+          </div>
+        </div>
+        <div class="split-earth__divider"></div>
+        <div class="split-earth__half split-earth__half--right">
+          <div class="split-earth__green">
+            <svg viewBox="0 0 200 300" class="split-earth__svg">
+              <!-- Wind turbines -->
+              <line x1="60" y1="280" x2="60" y2="160" stroke="#388e3c" stroke-width="4"/>
+              <ellipse cx="60" cy="155" rx="6" ry="6" fill="#2e7d32"/>
+              <line x1="60" y1="155" x2="60" y2="110" stroke="#66bb6a" stroke-width="2.5" transform="rotate(0 60 155)"/>
+              <line x1="60" y1="155" x2="30" y2="180" stroke="#66bb6a" stroke-width="2.5"/>
+              <line x1="60" y1="155" x2="90" y2="180" stroke="#66bb6a" stroke-width="2.5"/>
+
+              <line x1="145" y1="280" x2="145" y2="175" stroke="#388e3c" stroke-width="3.5"/>
+              <ellipse cx="145" cy="170" rx="5" ry="5" fill="#2e7d32"/>
+              <line x1="145" y1="170" x2="145" y2="133" stroke="#66bb6a" stroke-width="2"/>
+              <line x1="145" y1="170" x2="120" y2="192" stroke="#66bb6a" stroke-width="2"/>
+              <line x1="145" y1="170" x2="170" y2="192" stroke="#66bb6a" stroke-width="2"/>
+
+              <!-- Solar panels -->
+              <rect x="20" y="220" width="60" height="35" fill="#1565c0" rx="3" transform="rotate(-5 50 237)"/>
+              <line x1="20" y1="232" x2="80" y2="227" stroke="#90caf9" stroke-width="1"/>
+              <line x1="20" y1="244" x2="80" y2="239" stroke="#90caf9" stroke-width="1"/>
+              <line x1="40" y1="220" x2="37" y2="255" stroke="#90caf9" stroke-width="1"/>
+              <line x1="60" y1="220" x2="57" y2="255" stroke="#90caf9" stroke-width="1"/>
+
+              <!-- Trees -->
+              <ellipse cx="170" cy="210" rx="20" ry="25" fill="#388e3c"/>
+              <ellipse cx="165" cy="198" rx="15" ry="20" fill="#43a047"/>
+              <rect x="167" y="230" width="6" height="20" fill="#5d4037"/>
+
+              <!-- Sun -->
+              <circle cx="160" cy="50" r="28" fill="#f9a825" opacity="0.9"/>
+              <circle cx="160" cy="50" r="22" fill="#ffd54f"/>
+              <!-- Sun rays -->
+              <line x1="160" y1="15" x2="160" y2="8" stroke="#f9a825" stroke-width="3" stroke-linecap="round"/>
+              <line x1="185" y1="25" x2="190" y2="20" stroke="#f9a825" stroke-width="3" stroke-linecap="round"/>
+              <line x1="195" y1="50" x2="202" y2="50" stroke="#f9a825" stroke-width="3" stroke-linecap="round"/>
+              <line x1="185" y1="75" x2="190" y2="80" stroke="#f9a825" stroke-width="3" stroke-linecap="round"/>
+              <line x1="135" y1="25" x2="130" y2="20" stroke="#f9a825" stroke-width="3" stroke-linecap="round"/>
+              <line x1="125" y1="50" x2="118" y2="50" stroke="#f9a825" stroke-width="3" stroke-linecap="round"/>
+
+              <!-- Blue sky wash -->
+              <rect x="0" y="0" width="200" height="160" fill="rgba(79,195,247,0.15)" rx="0"/>
+              <!-- Green ground -->
+              <ellipse cx="100" cy="270" rx="100" ry="20" fill="rgba(102,187,106,0.3)"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <!-- People silhouettes -->
+      <div class="split-earth__people">
+        <svg viewBox="0 0 200 80" class="people-svg">
+          <ellipse cx="55" cy="72" rx="12" ry="5" fill="rgba(0,0,0,0.15)"/>
+          <ellipse cx="100" cy="72" rx="14" ry="5" fill="rgba(0,0,0,0.15)"/>
+          <ellipse cx="145" cy="72" rx="12" ry="5" fill="rgba(0,0,0,0.15)"/>
+          <!-- Person 1 -->
+          <circle cx="55" cy="20" r="8" fill="#5d4037"/>
+          <path d="M48 30 Q55 55 55 65 Q55 55 62 30 Z" fill="#795548"/>
+          <!-- Person 2 (middle/taller) -->
+          <circle cx="100" cy="16" r="9" fill="#4a3728"/>
+          <path d="M92 28 Q100 55 100 65 Q100 55 108 28 Z" fill="#5d4037"/>
+          <!-- Person 3 -->
+          <circle cx="145" cy="20" r="8" fill="#388e3c"/>
+          <path d="M138 30 Q145 55 145 65 Q145 55 152 30 Z" fill="#43a047"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRESS STATS -->
+  <section class="progress-section" id="progress">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">📊 Data & Fakta</span>
+        <h2>Tahukah Kamu?</h2>
+        <p>Angka-angka yang membuktikan urgensi transisi energi Indonesia</p>
+      </div>
+      <div class="progress-grid">
+        <div class="progress-card" data-aos>
+          <div class="progress-card__icon">🌿</div>
+          <div class="progress-card__label">Energi Terbarukan Dapat Kurangi Emisi CO₂</div>
+          <div class="progress-card__bar-wrap">
+            <div class="progress-card__bar">
+              <div class="progress-card__fill" data-target="70" style="background: linear-gradient(90deg, #2e7d32, #66bb6a)"></div>
+            </div>
+            <span class="progress-card__value" data-count="70">0%</span>
+          </div>
+        </div>
+        <div class="progress-card" data-aos>
+          <div class="progress-card__icon">⚡</div>
+          <div class="progress-card__label">Potensi Energi Terbarukan Indonesia</div>
+          <div class="progress-card__bar-wrap">
+            <div class="progress-card__bar">
+              <div class="progress-card__fill" data-target="85" style="background: linear-gradient(90deg, #1565c0, #4fc3f7)"></div>
+            </div>
+            <span class="progress-card__value" data-count="3600" data-suffix=" GW">0 GW</span>
+          </div>
+        </div>
+        <div class="progress-card" data-aos>
+          <div class="progress-card__icon">👥</div>
+          <div class="progress-card__label">Lapangan Kerja Baru dari Transisi Energi</div>
+          <div class="progress-card__bar-wrap">
+            <div class="progress-card__bar">
+              <div class="progress-card__fill" data-target="78" style="background: linear-gradient(90deg, #f9a825, #ffee58)"></div>
+            </div>
+            <span class="progress-card__value" data-count="24" data-suffix=" Juta">0 Juta</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TANTANGAN -->
   <section class="section tantangan" id="tantangan">
     <div class="container">
-      <div class="section-header">
-        <div class="section-badge red">⚠ Tantangan Kita</div>
+      <div class="section-header" data-aos>
+        <span class="section-tag">⚠️ Tantangan Kita</span>
         <h2>Masalah yang Harus Kita Hadapi</h2>
+        <p>Generasi hari ini penentu energi masa depan</p>
       </div>
-      <div class="card-grid">
-        <div class="challenge-card" data-delay="0">
-          <div class="card-icon">🏭</div>
+      <div class="cards-grid">
+        <div class="card card--danger" data-aos>
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="28" width="10" height="14" fill="#c62828" rx="1"/>
+              <rect x="22" y="22" width="10" height="20" fill="#b71c1c" rx="1"/>
+              <rect x="36" y="32" width="8" height="10" fill="#c62828" rx="1"/>
+              <path d="M12 26 Q14 20 16 18 Q18 16 12 12 Q16 14 18 10 Q20 14 16 18" fill="#ef5350"/>
+              <path d="M26 20 Q28 14 30 12 Q32 10 26 6 Q30 8 32 4 Q34 8 30 12" fill="#ef5350"/>
+              <ellipse cx="14" cy="10" rx="8" ry="6" fill="rgba(100,100,100,0.5)"/>
+              <ellipse cx="28" cy="8" rx="9" ry="7" fill="rgba(80,80,80,0.5)"/>
+            </svg>
+          </div>
           <h3>Ketergantungan Energi Fosil</h3>
-          <p>Bahan bakar fosil masih mendominasi 80% kebutuhan energi global, menghasilkan emisi yang merusak atmosfer.</p>
+          <p>Bahan bakar fosil masih mendominasi 85% kebutuhan energi dunia, menguras sumber daya yang tidak dapat diperbarui.</p>
         </div>
-        <div class="challenge-card" data-delay="100">
-          <div class="card-icon">☁️</div>
+        <div class="card card--danger" data-aos>
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="16" fill="rgba(198,40,40,0.15)" stroke="#c62828" stroke-width="2"/>
+              <path d="M16 20 Q20 14 24 16 Q28 18 26 24 Q24 30 20 28 Q16 26 16 20Z" fill="rgba(239,83,80,0.6)"/>
+              <circle cx="24" cy="24" r="6" fill="#ef5350" opacity="0.8"/>
+              <path d="M10 38 Q18 32 24 30 Q30 32 38 38" stroke="#c62828" stroke-width="2" fill="none"/>
+              <path d="M8 28 Q12 24 16 26" stroke="#ef9a9a" stroke-width="1.5" fill="none"/>
+              <path d="M32 26 Q36 24 40 28" stroke="#ef9a9a" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
           <h3>Polusi Udara dan Air</h3>
-          <p>Pembakaran bahan bakar fosil mencemari udara dan sumber air, berdampak langsung pada kesehatan jutaan orang.</p>
+          <p>Emisi karbon dan limbah industri mencemari ekosistem, mengancam kesehatan jutaan manusia dan makhluk hidup.</p>
         </div>
-        <div class="challenge-card" data-delay="200">
-          <div class="card-icon">🌡️</div>
+        <div class="card card--danger" data-aos>
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="14" fill="rgba(198,40,40,0.1)" stroke="#c62828" stroke-width="2"/>
+              <path d="M24 10 Q30 16 28 22 Q26 28 24 24 Q22 20 20 26 Q18 32 24 38" stroke="#ef5350" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <circle cx="34" cy="16" r="4" fill="#f9a825"/>
+              <path d="M30 14 L38 12 M32 10 L36 6" stroke="#f9a825" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
           <h3>Perubahan Iklim Global</h3>
-          <p>Suhu bumi meningkat 1,1°C sejak era pra-industri. Tanpa aksi nyata, dampaknya akan semakin ekstrem.</p>
+          <p>Pemanasan global menyebabkan cuaca ekstrem, naiknya permukaan laut, dan gangguan ekosistem di seluruh dunia.</p>
         </div>
-        <div class="challenge-card" data-delay="300">
-          <div class="card-icon">📉</div>
+        <div class="card card--danger" data-aos>
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 36 L12 20 L20 28 L24 12 L28 22 L36 16 L40 36 Z" fill="rgba(198,40,40,0.2)" stroke="#c62828" stroke-width="2"/>
+              <polyline points="8,36 40,36" stroke="#c62828" stroke-width="2"/>
+              <line x1="8" y1="36" x2="40" y2="36" stroke="#795548" stroke-width="2"/>
+              <path d="M12 30 L20 22 L28 18 L36 24" stroke="#ef5350" stroke-width="2" fill="none" stroke-dasharray="3,2"/>
+            </svg>
+          </div>
           <h3>Sumber Daya Makin Menipis</h3>
-          <p>Cadangan energi fosil diperkirakan akan habis dalam beberapa dekade ke depan jika konsumsi terus berlanjut.</p>
+          <p>Cadangan minyak dan gas bumi diprediksi habis dalam 50 tahun ke depan jika konsumsi terus meningkat.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== SPLIT EARTH ========== -->
-  <section class="section split-earth" id="split">
-    <div class="container">
-      <div class="split-header">
-        <h2>Dua Pilihan di Hadapan Kita</h2>
-        <p>Masa depan bumi ada di tangan kita. Pilih jalan yang benar.</p>
-      </div>
-      <div class="split-wrapper">
-        <div class="split-side left-side">
-          <div class="split-label pollution">Masa Kini yang Salah</div>
-          <div class="split-icons">
-            <div class="split-icon">🏭</div>
-            <div class="split-icon">💨</div>
-            <div class="split-icon">🌫️</div>
-          </div>
-          <ul class="split-list">
-            <li>Emisi karbon meningkat</li>
-            <li>Udara tidak sehat</li>
-            <li>Bumi memanas</li>
-            <li>Bencana alam meningkat</li>
-          </ul>
-        </div>
-
-        <div class="split-center">
-          <div class="earth-circle">
-            <div class="earth-half earth-dark"></div>
-            <div class="earth-half earth-green"></div>
-            <div class="earth-divider"></div>
-            <div class="earth-emoji">🌍</div>
-          </div>
-          <p class="split-cta-text">Generasi hari ini,<br/>penentu energi masa depan.</p>
-        </div>
-
-        <div class="split-side right-side">
-          <div class="split-label green">Masa Depan yang Bisa Kita Ciptakan</div>
-          <div class="split-icons">
-            <div class="split-icon">☀️</div>
-            <div class="split-icon">🌬️</div>
-            <div class="split-icon">💧</div>
-          </div>
-          <ul class="split-list green">
-            <li>Energi bersih melimpah</li>
-            <li>Udara segar & sehat</li>
-            <li>Iklim stabil</li>
-            <li>Alam lestari</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PROGRESS BARS ========== -->
-  <section class="section progress-section" id="progress">
-    <div class="container">
-      <div class="section-header center">
-        <div class="section-badge green">📊 Tahukah Kamu?</div>
-        <h2>Data yang Harus Kita Ketahui</h2>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-top">
-            <span class="stat-icon">🌍</span>
-            <span class="stat-value" data-target="70">0</span><span class="stat-unit">%</span>
-          </div>
-          <p class="stat-label">Pengurangan Emisi CO₂ dengan Energi Terbarukan</p>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar" data-width="70" style="background: linear-gradient(90deg, #e74c3c, #f39c12);"></div>
-          </div>
-          <p class="stat-desc">Jika seluruh energi dunia beralih ke sumber terbarukan, emisi global dapat dipangkas hingga 70%</p>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-top">
-            <span class="stat-icon">⚡</span>
-            <span class="stat-value" data-target="3600">0</span><span class="stat-unit"> GW</span>
-          </div>
-          <p class="stat-label">Potensi Energi Terbarukan Indonesia</p>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar" data-width="90" style="background: linear-gradient(90deg, #27ae60, #2ecc71);"></div>
-          </div>
-          <p class="stat-desc">Indonesia memiliki salah satu potensi energi terbarukan terbesar di dunia — lebih dari 3.600 GW!</p>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-top">
-            <span class="stat-icon">💼</span>
-            <span class="stat-value" data-target="25">0</span><span class="stat-unit">juta</span>
-          </div>
-          <p class="stat-label">Lapangan Kerja Baru dari Transisi Energi</p>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar" data-width="60" style="background: linear-gradient(90deg, #2980b9, #3498db);"></div>
-          </div>
-          <p class="stat-desc">Transisi energi bersih dapat menciptakan jutaan lapangan kerja baru di sektor hijau global</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== SOLUSI ========== -->
+  <!-- SOLUSI -->
   <section class="section solusi" id="solusi">
     <div class="container">
-      <div class="section-header">
-        <div class="section-badge green">✅ Solusi Kita</div>
-        <h2>Energi Terbarukan sebagai Jawaban</h2>
+      <div class="section-header" data-aos>
+        <span class="section-tag">🌿 Solusi Kita</span>
+        <h2>Energi Terbarukan untuk Masa Depan</h2>
+        <p>Beralih ke energi bersih dimulai dari hari ini</p>
       </div>
-      <div class="solusi-grid">
-        <div class="solusi-card" data-delay="0">
-          <div class="solusi-icon sun">☀️</div>
+      <div class="cards-grid">
+        <div class="card card--green" data-aos>
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="22" r="10" fill="#f9a825"/>
+              <circle cx="24" cy="22" r="7" fill="#ffd54f"/>
+              <line x1="24" y1="6" x2="24" y2="2" stroke="#f9a825" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="38" y1="10" x2="41" y2="7" stroke="#f9a825" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="42" y1="22" x2="46" y2="22" stroke="#f9a825" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="38" y1="34" x2="41" y2="37" stroke="#f9a825" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="10" y1="10" x2="7" y2="7" stroke="#f9a825" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="6" y1="22" x2="2" y2="22" stroke="#f9a825" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="10" y1="34" x2="7" y2="37" stroke="#f9a825" stroke-width="2.5" stroke-linecap="round"/>
+              <rect x="10" y="34" width="28" height="8" fill="#1565c0" rx="2"/>
+              <line x1="10" y1="38" x2="38" y2="38" stroke="#90caf9" stroke-width="1"/>
+              <line x1="24" y1="34" x2="24" y2="42" stroke="#90caf9" stroke-width="1"/>
+            </svg>
+          </div>
           <h3>Energi Surya</h3>
-          <p>Memanfaatkan sinar matahari yang melimpah dan bersih. Indonesia menerima sinar matahari sepanjang tahun — potensi tak ternilai!</p>
-          <div class="solusi-tag">Solar Panel · Photovoltaic</div>
+          <p>Memanfaatkan sinar matahari yang melimpah dan bersih. Indonesia menerima 4–5 kWh/m²/hari sepanjang tahun.</p>
+          <div class="card__tag">Panel Fotovoltaik</div>
         </div>
-        <div class="solusi-card" data-delay="150">
-          <div class="solusi-icon wind">🌬️</div>
+        <div class="card card--green" data-aos>
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="24" y1="44" x2="24" y2="22" stroke="#2e7d32" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="24" cy="20" r="4" fill="#388e3c"/>
+              <line x1="24" y1="20" x2="24" y2="6" stroke="#66bb6a" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="24" y1="20" x2="10" y2="32" stroke="#66bb6a" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="24" y1="20" x2="38" y2="32" stroke="#66bb6a" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M6 28 Q14 20 22 24" stroke="#4fc3f7" stroke-width="1.5" fill="none" opacity="0.7"/>
+              <path d="M4 22 Q10 16 16 20" stroke="#4fc3f7" stroke-width="1.5" fill="none" opacity="0.5"/>
+            </svg>
+          </div>
           <h3>Energi Angin</h3>
-          <p>Angin bergerak menjadi sumber listrik tanpa emisi. Turbin angin modern mampu menghasilkan energi untuk ribuan rumah.</p>
-          <div class="solusi-tag">Wind Turbine · PLTA Angin</div>
+          <p>Angin bergerak menjadi sumber listrik tanpa emisi. Turbin angin modern mampu menghasilkan 2–3 MW per unit.</p>
+          <div class="card__tag">Turbin Angin</div>
         </div>
-        <div class="solusi-card" data-delay="300">
-          <div class="solusi-icon water">💧</div>
+        <div class="card card--green" data-aos>
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 20 Q12 14 20 18 Q28 22 36 16 Q44 10 48 16" stroke="#4fc3f7" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M4 28 Q12 22 20 26 Q28 30 36 24 Q44 18 48 24" stroke="#29b6f6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <rect x="14" y="28" width="20" height="14" fill="#1565c0" rx="2"/>
+              <rect x="18" y="22" width="12" height="10" fill="#1976d2" rx="2"/>
+              <path d="M22 28 L26 28 L24 32 Z" fill="#90caf9"/>
+              <line x1="12" y1="42" x2="36" y2="42" stroke="#0d47a1" stroke-width="2"/>
+            </svg>
+          </div>
           <h3>Energi Air</h3>
-          <p>Kekuatan air untuk energi yang stabil dan berkelanjutan. Sungai-sungai Indonesia menyimpan potensi hidroelektrik yang besar.</p>
-          <div class="solusi-tag">Hidroelektrik · PLTA</div>
+          <p>Kekuatan air untuk energi yang stabil dan berkelanjutan. Indonesia memiliki potensi 75 GW dari PLTA.</p>
+          <div class="card__tag">Hidroelektrik</div>
+        </div>
+      </div>
+
+      <!-- SMART ENERGY TECH -->
+      <div class="tech-section" data-aos>
+        <div class="tech-section__header">
+          <span class="section-tag">🤖 Teknologi Cerdas</span>
+          <h3>Smart Energy System</h3>
+        </div>
+        <div class="tech-flow">
+          <div class="tech-node">
+            <svg viewBox="0 0 40 40" fill="none">
+              <rect x="6" y="6" width="28" height="28" rx="6" fill="rgba(79,195,247,0.2)" stroke="#4fc3f7" stroke-width="2"/>
+              <circle cx="14" cy="14" r="3" fill="#4fc3f7"/>
+              <circle cx="26" cy="14" r="3" fill="#4fc3f7"/>
+              <circle cx="14" cy="26" r="3" fill="#4fc3f7"/>
+              <circle cx="26" cy="26" r="3" fill="#4fc3f7"/>
+              <line x1="14" y1="14" x2="26" y2="14" stroke="#4fc3f7" stroke-width="1.5"/>
+              <line x1="14" y1="14" x2="14" y2="26" stroke="#4fc3f7" stroke-width="1.5"/>
+              <line x1="26" y1="14" x2="26" y2="26" stroke="#4fc3f7" stroke-width="1.5"/>
+              <line x1="14" y1="26" x2="26" y2="26" stroke="#4fc3f7" stroke-width="1.5"/>
+            </svg>
+            <span>IoT Monitoring</span>
+            <small>Pemantauan energi real-time</small>
+          </div>
+          <div class="tech-arrow">→</div>
+          <div class="tech-node tech-node--center">
+            <svg viewBox="0 0 40 40" fill="none">
+              <rect x="4" y="4" width="32" height="32" rx="4" fill="rgba(46,125,50,0.2)" stroke="#2e7d32" stroke-width="2"/>
+              <text x="20" y="26" text-anchor="middle" fill="#2e7d32" font-size="14" font-weight="bold">AI</text>
+            </svg>
+            <span>AI Optimization</span>
+            <small>Kecerdasan buatan mengoptimalkan penggunaan</small>
+          </div>
+          <div class="tech-arrow">→</div>
+          <div class="tech-node">
+            <svg viewBox="0 0 40 40" fill="none">
+              <rect x="6" y="8" width="28" height="22" rx="4" fill="rgba(102,187,106,0.2)" stroke="#66bb6a" stroke-width="2"/>
+              <line x1="10" y1="14" x2="30" y2="14" stroke="#66bb6a" stroke-width="1.5"/>
+              <line x1="10" y1="19" x2="30" y2="19" stroke="#66bb6a" stroke-width="1.5"/>
+              <line x1="10" y1="24" x2="24" y2="24" stroke="#66bb6a" stroke-width="1.5"/>
+              <rect x="14" y="30" width="12" height="4" fill="#66bb6a" rx="1"/>
+            </svg>
+            <span>Smart Grid</span>
+            <small>Distribusi listrik efisien dan andal</small>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== TEKNOLOGI CERDAS ========== -->
-  <section class="section teknologi" id="teknologi">
-    <div class="container">
-      <div class="section-header center">
-        <div class="section-badge blue">🤖 Teknologi Cerdas</div>
-        <h2>Smart Energy System</h2>
-        <p class="section-desc">Menggabungkan kecerdasan buatan dengan energi terbarukan untuk sistem yang efisien dan andal.</p>
-      </div>
-      <div class="tech-flow">
-        <div class="tech-node">
-          <div class="tech-icon">📡</div>
-          <h4>IoT Monitoring</h4>
-          <p>Pemantauan energi secara real-time</p>
-        </div>
-        <div class="tech-arrow">→</div>
-        <div class="tech-node highlight">
-          <div class="tech-icon">🤖</div>
-          <h4>AI Optimization</h4>
-          <p>Kecerdasan buatan mengoptimalkan penggunaan energi</p>
-        </div>
-        <div class="tech-arrow">→</div>
-        <div class="tech-node">
-          <div class="tech-icon">⚡</div>
-          <h4>Smart Grid</h4>
-          <p>Distribusi listrik lebih efisien dan andal</p>
-        </div>
-      </div>
-      <div class="tech-desc-box">
-        <p>Sistem ini memungkinkan jaringan listrik yang <strong>adaptif, hemat, dan mandiri</strong> — meminimalkan pemborosan dan memaksimalkan penggunaan sumber energi terbarukan di setiap momen.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== DAMPAK POSITIF ========== -->
+  <!-- DAMPAK POSITIF -->
   <section class="section dampak" id="dampak">
     <div class="container">
-      <div class="section-header">
-        <div class="section-badge green">🌱 Dampak Positif</div>
-        <h2>Manfaat yang Akan Kita Rasakan</h2>
+      <div class="section-header" data-aos>
+        <span class="section-tag">🌱 Dampak Positif</span>
+        <h2>Manfaat Energi Terbarukan</h2>
+        <p>Masa depan lebih cerah untuk semua</p>
       </div>
-      <div class="dampak-list">
-        <div class="dampak-item" data-delay="0">
-          <div class="dampak-dot green"></div>
-          <div>
-            <h4>Mengurangi Emisi Karbon</h4>
-            <p>Langkah nyata melawan perubahan iklim yang semakin mengkhawatirkan.</p>
+      <div class="dampak-grid">
+        <div class="dampak-item" data-aos>
+          <div class="dampak-item__icon">
+            <svg viewBox="0 0 36 36" fill="none"><path d="M18 4 Q22 10 20 16 Q18 22 18 18 Q18 14 16 20 Q14 26 18 32" stroke="#2e7d32" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="18" cy="18" r="14" stroke="#66bb6a" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/></svg>
           </div>
+          <h4>Mengurangi Emisi Karbon</h4>
+          <p>Energi terbarukan dapat menurunkan emisi CO₂ global hingga 70%</p>
         </div>
-        <div class="dampak-item" data-delay="100">
-          <div class="dampak-dot teal"></div>
-          <div>
-            <h4>Udara Bersih & Lingkungan Sehat</h4>
-            <p>Hidup lebih sehat tanpa polusi dari pembakaran bahan bakar fosil.</p>
+        <div class="dampak-item" data-aos>
+          <div class="dampak-item__icon">
+            <svg viewBox="0 0 36 36" fill="none"><path d="M6 18 Q10 10 18 10 Q26 10 30 18" stroke="#4fc3f7" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M8 22 Q12 28 18 28 Q24 28 28 22" stroke="#4fc3f7" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="18" cy="18" r="4" fill="#4fc3f7" opacity="0.5"/></svg>
           </div>
+          <h4>Udara Bersih & Lingkungan Sehat</h4>
+          <p>Tanpa pembakaran bahan bakar, kualitas udara membaik drastis</p>
         </div>
-        <div class="dampak-item" data-delay="200">
-          <div class="dampak-dot blue"></div>
-          <div>
-            <h4>Energi Berkelanjutan untuk Semua</h4>
-            <p>Akses energi merata bagi seluruh lapisan masyarakat Indonesia.</p>
+        <div class="dampak-item" data-aos>
+          <div class="dampak-item__icon">
+            <svg viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="12" fill="rgba(249,168,37,0.2)" stroke="#f9a825" stroke-width="2"/><path d="M14 18 L16 20 L22 14" stroke="#f9a825" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
+          <h4>Energi Berkelanjutan untuk Semua</h4>
+          <p>Akses listrik merata hingga daerah terpencil di seluruh Indonesia</p>
         </div>
-        <div class="dampak-item" data-delay="300">
-          <div class="dampak-dot yellow"></div>
-          <div>
-            <h4>Hemat Biaya, Mandiri Energi</h4>
-            <p>Energi terbarukan semakin terjangkau dan memberi kemandirian jangka panjang.</p>
+        <div class="dampak-item" data-aos>
+          <div class="dampak-item__icon">
+            <svg viewBox="0 0 36 36" fill="none"><circle cx="18" cy="14" r="6" fill="rgba(46,125,50,0.2)" stroke="#2e7d32" stroke-width="2"/><path d="M10 28 Q10 22 18 22 Q26 22 26 28" stroke="#2e7d32" stroke-width="2" fill="none" stroke-linecap="round"/><line x1="12" y1="32" x2="24" y2="32" stroke="#66bb6a" stroke-width="2" stroke-linecap="round"/></svg>
           </div>
+          <h4>Hemat Biaya, Mandiri Energi</h4>
+          <p>Biaya operasional rendah setelah instalasi, mengurangi impor BBM</p>
         </div>
-        <div class="dampak-item" data-delay="400">
-          <div class="dampak-dot green"></div>
-          <div>
-            <h4>Masa Depan Lebih Hijau</h4>
-            <p>Warisan terbaik yang bisa kita berikan kepada generasi mendatang.</p>
+        <div class="dampak-item" data-aos>
+          <div class="dampak-item__icon">
+            <svg viewBox="0 0 36 36" fill="none"><ellipse cx="18" cy="22" rx="12" ry="8" fill="rgba(102,187,106,0.2)" stroke="#66bb6a" stroke-width="1.5"/><path d="M12 22 Q14 14 18 10 Q22 14 24 22" stroke="#2e7d32" stroke-width="2" fill="none"/><path d="M16 10 Q18 6 20 10" stroke="#2e7d32" stroke-width="1.5" fill="none"/></svg>
           </div>
+          <h4>Masa Depan Lebih Hijau</h4>
+          <p>Warisan bumi yang bersih dan sehat untuk generasi mendatang</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== CTA ========== -->
-  <section class="section cta-section" id="cta">
-    <div class="cta-bg">
-      <div class="cta-leaf cta-leaf-1">🌿</div>
-      <div class="cta-leaf cta-leaf-2">🍃</div>
-      <div class="cta-leaf cta-leaf-3">🌱</div>
+  <!-- CTA -->
+  <section class="cta-section" id="cta">
+    <div class="cta-section__bg">
+      <div class="cta-leaf cta-leaf--1">🌿</div>
+      <div class="cta-leaf cta-leaf--2">🍃</div>
+      <div class="cta-leaf cta-leaf--3">🌱</div>
     </div>
     <div class="container">
-      <div class="cta-inner">
-        <div class="cta-bolt">⚡</div>
-        <h2 class="cta-headline">Jika Bukan Kita Sekarang,<br/><em>Siapa Lagi?</em></h2>
-        <p class="cta-sub">Beralih ke energi bersih dimulai dari hari ini.</p>
-        <div class="cta-buttons">
-          <a href="#solusi" class="btn btn-primary">Pelajari Solusi</a>
-          <a href="#progress" class="btn btn-outline">Lihat Data</a>
+      <div class="cta-box" data-aos>
+        <div class="cta-box__lightning">⚡</div>
+        <h2 class="cta-box__title">Jika Bukan Kita Sekarang,<br/><span>Siapa Lagi?</span></h2>
+        <p class="cta-box__desc">Beralih ke energi bersih dimulai dari hari ini.<br/>Generasi hari ini, penentu energi masa depan.</p>
+        <div class="cta-box__actions">
+          <a href="#solusi" class="btn btn--primary btn--large">🌿 Mulai Berubah</a>
+          <a href="#profil" class="btn btn--outline btn--large">Pelajari Lebih Lanjut</a>
+        </div>
+        <div class="cta-box__stats">
+          <div class="cta-stat">
+            <strong>70%</strong>
+            <span>Pengurangan Emisi CO₂</span>
+          </div>
+          <div class="cta-stat">
+            <strong>3.600 GW</strong>
+            <span>Potensi Energi Indonesia</span>
+          </div>
+          <div class="cta-stat">
+            <strong>Jutaan</strong>
+            <span>Lapangan Kerja Baru</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== FOOTER ========== -->
+  <!-- PROFIL -->
+  <section class="section profil" id="profil">
+    <div class="container">
+      <div class="section-header" data-aos>
+        <span class="section-tag">👤 Profil</span>
+        <h2>Tentang Pembuat</h2>
+      </div>
+      <div class="profil-card" data-aos>
+        <div class="profil-card__photo-wrap">
+          <img src="foto_ganteng.jpg" alt="Syauqi Nuzul Abdi" class="profil-card__photo" />
+        </div>
+        <div class="profil-card__info">
+          <h3 class="profil-card__name">Syauqi Nuzul Abdi</h3>
+          <p class="profil-card__role">Mahasiswa Inovasi Energi · STITEK Bontang</p>
+          <p class="profil-card__bio">Poster ini diproduksi sebagai karya inovasi dalam rangka memperingati Hari Bumi Sedunia 2026, diselenggarakan oleh STITEK Bontang sebagai wujud komitmen kampus mendorong generasi muda berkontribusi nyata terhadap keberlanjutan lingkungan dan masa depan energi Indonesia.</p>
+          <div class="profil-card__contacts">
+            <a href="mailto:nuzulabdisyauqi@gmail.com" class="contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8 L12 14 L22 8"/></svg>
+              nuzulabdisyauqi@gmail.com
+            </a>
+            <a href="https://instagram.com/syauqinzul" target="_blank" class="contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+              @syauqinzul
+            </a>
+            <a href="tel:+6281334432910" class="contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.04 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              +62 813 3443 2910
+            </a>
+          </div>
+          <div class="profil-card__logos">
+            <img src="Logo_Kemendiktisaintek.png" alt="Kemendiktisaintek" class="profil-logo" />
+            <img src="Logo_Diktisaintek_Berdampak.png" alt="Diktisaintek" class="profil-logo" />
+            <img src="Logo_STITEK_Bontang.png" alt="STITEK Bontang" class="profil-logo" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-logos">
-        <img src="Logo_Kemendiktisaintek.png" alt="Kemendiktisaintek" />
-        <img src="Logo_Diktisaintek_Berdampak.png" alt="Diktisaintek" />
-        <img src="Logo_STITEK_Bontang.png" alt="STITEK" />
+      <div class="footer__content">
+        <p>© 2026 Syauqi Nuzul Abdi · STITEK Bontang · Inovasi Energi Terbarukan</p>
+        <p class="footer__tagline">Teknologi hijau hari ini, kehidupan berkelanjutan untuk generasi esok.</p>
       </div>
-      <div class="footer-info">
-        <p class="footer-name">STITEK Bontang – Sekolah Tinggi Teknologi Bontang</p>
-        <p>Dalam Rangka Memperingati Hari Bumi Sedunia 2026</p>
-        <div class="footer-contacts">
-          <span>📸 @stitekbontang</span>
-          <span>🌐 stitek.ac.id</span>
-          <span>📞 0811 560 1311</span>
-        </div>
-      </div>
-      <p class="footer-copy">© 2026 STITEK Bontang · Inovasi Energi Terbarukan</p>
     </div>
   </footer>
+
+  <!-- SCROLL TO TOP -->
+  <button class="scroll-top" id="scrollTop" aria-label="Kembali ke atas">↑</button>
 
   <script src="main.js"></script>
 </body>
