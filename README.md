@@ -82,32 +82,128 @@ renewable-energy-innovation/
 
 ---
 
-## Cara Menjalankan Secara Lokal
-
-```bash
-# Clone repository
-git clone https://github.com/syauqinzul/renewable-energy-innovation.git
-
-# Masuk ke direktori
-cd renewable-energy-innovation
-
-# Buka di browser
-# Cukup buka file index.html langsung di browser
-open index.html
-```
-
-> Tidak memerlukan build tool, framework, atau dependensi tambahan — murni HTML, CSS, dan JavaScript.
-
----
-
-## Penyelenggara
-
-Karya ini diselenggarakan dalam kerangka program **DIKTISAINTEK Berdampak** oleh **Kementerian Pendidikan Tinggi, Sains, dan Teknologi Republik Indonesia (KEMENDIKTISAINTEK)** bersama **STITEK Bontang**.
-
----
-
 ## Lisensi
 
 Proyek ini dibuat untuk keperluan edukasi dan non-komersial dalam rangka Hari Bumi Sedunia 2026.
 
 ---
+
+#  Masa Depan Bumi — Inovasi Energi Terbarukan
+
+> **Website interaktif versi digital premium dari poster lomba Hari Bumi Sedunia 2026**  
+> Dibuat oleh **Syauqi Nuzul Abdi** · STITEK Bontang
+
+---
+
+
+##  Fitur Utama
+
+- 🌍 **Split Earth Animation** — Visualisasi interaktif perbandingan bumi polusi vs bumi hijau
+- 📊 **Animated Progress Bar** — Count-up animasi data fakta energi Indonesia
+- 🌿 **Eco Design** — Tampilan natural, clean, dan modern selaras dengan poster
+- 💎 **Glass Effect UI** — Efek kaca halus di navbar, card, dan CTA section
+- 📱 **Fully Responsive** — Tampil sempurna di HP, tablet, dan laptop
+- ⚡ **Smooth Animations** — Scroll-triggered fade-up & hover interactions
+- 🍔 **Hamburger Menu** — Navigasi mobile yang smooth dan accessible
+
+---
+
+##  Struktur Proyek
+
+```
+renewable-energy-innovation/
+├── foto/
+│   └── foto ganteng.jpg        # Foto profil pembuat
+├── logo/
+│   ├── Logo_Kemendiktisaintek.png
+│   ├── Logo_Diktisaintek_Berdampak.png
+│   └── Logo_STITEK_Bontang.png
+├── index.html                  # Struktur halaman utama
+├── style.css                   # Styling & responsive design
+├── main.js                     # Interaksi & animasi JavaScript
+└── README.md
+```
+
+---
+
+##  Design System
+
+| Elemen | Nilai |
+|--------|-------|
+| **Font** | Poppins · Playfair Display |
+| **Hijau Utama** | `#2e7d32` |
+| **Hijau Muda** | `#66bb6a` |
+| **Krem** | `#f5f0e6` |
+| **Biru** | `#4fc3f7` |
+| **Kuning** | `#f9a825` |
+| **Glass Effect** | `backdrop-filter: blur(12px)` |
+
+---
+
+
+##  Teknologi
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Google Fonts](https://img.shields.io/badge/Google_Fonts-4285F4?style=flat&logo=google&logoColor=white)
+
+- **Pure HTML, CSS, JavaScript** — tanpa framework, tanpa dependency
+- **CSS Custom Properties** — design token konsisten
+- **IntersectionObserver API** — scroll animation performa tinggi
+- **CSS Grid & Flexbox** — layout responsif modern
+- **SVG Icons** — ikon ringan dan tajam di semua resolusi
+
+---
+
+##  Cara Menjalankan
+
+### Lokal
+```bash
+# Clone repository
+git clone https://github.com/syauqinzul/renewable-energy-innovation.git
+
+# Buka di browser
+cd renewable-energy-innovation
+# Buka index.html langsung, atau gunakan Live Server di VS Code
+```
+
+### GitHub Pages
+Website sudah di-deploy otomatis via **GitHub Pages**.  
+Akses: `https://syauqinzul.github.io/renewable-energy-innovation`
+
+---
+
+## 👤 Pembuat
+
+**Syauqi Nuzul Abdi**  
+Mahasiswa Inovasi Energi · STITEK Bontang
+
+| Kontak | |
+|--------|--|
+| 📧 Email | nuzulabdisyauqi@gmail.com |
+| 📷 Instagram | [@syauqinzul](https://instagram.com/syauqinzul) |
+| 📞 Telepon | +62 813 3443 2910 |
+
+---
+
+## 🏛️ Institusi
+
+| Logo | Nama |
+|------|------|
+| Kemendiktisaintek | Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi |
+| Diktisaintek Berdampak | Program Direktorat Jenderal Pendidikan Tinggi |
+| STITEK Bontang | Sekolah Tinggi Teknologi Bontang |
+
+---
+
+## 📄 Lisensi
+
+Proyek ini dibuat untuk keperluan **lomba poster Hari Bumi Sedunia 2026** yang diselenggarakan oleh STITEK Bontang.  
+© 2026 Syauqi Nuzul Abdi · All Rights Reserved.
+
+---
+
+<div align="center">
+  <strong>🌿 Teknologi hijau hari ini, kehidupan berkelanjutan untuk generasi esok.</strong>
+</div>
