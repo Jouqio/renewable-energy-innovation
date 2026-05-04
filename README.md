@@ -54,15 +54,6 @@ Tiga pilar inovasi digital untuk pengelolaan energi cerdas:
 
 ---
 
----
-
-## Lisensi
-
-Proyek ini dibuat untuk keperluan edukasi dan non-komersial dalam rangka Hari Bumi Sedunia 2026.
-
----
----
-
 #  Masa Depan Bumi — Inovasi Energi Terbarukan
 
 > **Website interaktif versi digital premium dari poster lomba Hari Bumi Sedunia 2026**  
