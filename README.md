@@ -78,10 +78,10 @@ Tiga pilar inovasi digital untuk pengelolaan energi cerdas:
 
 ```
 renewable-energy-innovation/
-├── .git
-│   ├── Logo_Kemendiktisaintek.png
-│   ├── Logo_Diktisaintek_Berdampak.png
-│   └── Logo_STITEK_Bontang.png
+├── .gitignore
+│   ├── foto
+│   ├── logo
+│   └── poster
 ├── index.html                  # Struktur halaman utama
 ├── style.css                   # Styling & responsive design
 ├── main.js                     # Interaksi & animasi JavaScript
