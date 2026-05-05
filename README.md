@@ -78,9 +78,7 @@ Tiga pilar inovasi digital untuk pengelolaan energi cerdas:
 
 ```
 renewable-energy-innovation/
-├── foto/
-│   └── foto ganteng.jpg        # Foto profil pembuat
-├── logo/
+├── .git
 │   ├── Logo_Kemendiktisaintek.png
 │   ├── Logo_Diktisaintek_Berdampak.png
 │   └── Logo_STITEK_Bontang.png
