@@ -83,9 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const aosElements = document.querySelectorAll('[data-aos]');
 
   const aosObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // Stagger delay for grid children
         const delay = entry.target.closest('.cards-grid, .dampak-grid, .progress-grid')
           ? Array.from(entry.target.parentElement.children).indexOf(entry.target) * 100
           : 0;
@@ -96,11 +95,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.05,
+    rootMargin: '0px 0px -20px 0px'
   });
 
   aosElements.forEach(el => aosObserver.observe(el));
+
+  // Fallback: paksa tampilkan semua elemen AOS yang belum muncul setelah 2.5 detik
+  // (untuk browser HP yang IntersectionObserver-nya bermasalah)
+  setTimeout(() => {
+    document.querySelectorAll('[data-aos]:not(.aos-animate)').forEach(el => {
+      el.classList.add('aos-animate');
+    });
+  }, 2500);
 
   // ─── Progress Bar Animations (count up) ───
   const progressCards = document.querySelectorAll('.progress-card');

@@ -1532,3 +1532,28 @@ a { text-decoration: none; color: inherit; }
     font-size: 1.4rem;
   }
 }
+
+/* ================================
+   MOBILE FIX — Pastikan poster & gambar selalu tampil
+================================ */
+.poster-wrapper,
+.poster-frame,
+.poster-frame__inner,
+.poster-frame__img {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* Pastikan semua img tidak tersembunyi karena parent AOS */
+img {
+  opacity: 1 !important;
+}
+
+/* Override AOS hanya untuk elemen gambar agar tidak terpengaruh */
+[data-aos] img,
+[data-aos] .poster-frame,
+[data-aos] .profil-card__photo {
+  opacity: 1 !important;
+  transform: none !important;
+}
