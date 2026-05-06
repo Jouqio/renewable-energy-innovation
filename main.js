@@ -217,5 +217,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ─── Lightbox Poster ───
+  const lightbox = document.getElementById('lightbox');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxBackdrop = document.getElementById('lightboxBackdrop');
+  const posterZoomBtn = document.getElementById('posterZoomBtn');
+  const posterImg = document.getElementById('posterImg');
+
+  const openLightbox = () => {
+    lightbox?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    lightbox?.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  posterZoomBtn?.addEventListener('click', openLightbox);
+  posterImg?.addEventListener('click', openLightbox);
+  lightboxClose?.addEventListener('click', closeLightbox);
+  lightboxBackdrop?.addEventListener('click', closeLightbox);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
   console.log('🌿 Renewable Energy Website — Loaded. Syauqi Nuzul Abdi · STITEK Bontang');
 });
