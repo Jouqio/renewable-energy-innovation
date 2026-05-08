@@ -2130,3 +2130,19 @@ img {
     grid-row: auto !important;
   }
 }
+
+.poster-layout-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 14px 18px;
+  background: rgba(46, 125, 50, 0.08);
+  border: 1px solid rgba(46, 125, 50, 0.2);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}

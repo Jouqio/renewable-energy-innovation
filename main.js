@@ -276,6 +276,29 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape") closeLightbox();
   });
 
+  // ─── Lightbox Layout ───
+  const lightboxLayout = document.getElementById("lightboxLayout");
+  const lightboxLayoutClose = document.getElementById("lightboxLayoutClose");
+  const lightboxLayoutBackdrop = document.getElementById(
+    "lightboxLayoutBackdrop",
+  );
+  const layoutZoomBtn = document.getElementById("layoutZoomBtn");
+  const layoutImg = document.getElementById("layoutImg");
+
+  const openLightboxLayout = () => {
+    lightboxLayout?.classList.add("active");
+    document.body.style.overflow = "hidden";
+  };
+  const closeLightboxLayout = () => {
+    lightboxLayout?.classList.remove("active");
+    document.body.style.overflow = "";
+  };
+
+  layoutZoomBtn?.addEventListener("click", openLightboxLayout);
+  layoutImg?.addEventListener("click", openLightboxLayout);
+  lightboxLayoutClose?.addEventListener("click", closeLightboxLayout);
+  lightboxLayoutBackdrop?.addEventListener("click", closeLightboxLayout);
+  
   console.log(
     "🌿 Renewable Energy Website — Loaded. Syauqi Nuzul Abdi · STITEK Bontang",
   );
