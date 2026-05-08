@@ -81,6 +81,7 @@ renewable-energy-innovation/
 ├── .gitignore
 │   ├── foto
 │   ├── logo
+│   ├── layout
 │   └── poster
 ├── index.html                  # Struktur halaman utama
 ├── style.css                   # Styling & responsive design
