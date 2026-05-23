@@ -64,16 +64,6 @@ Akses: `https://syauqinzul.github.io/renewable-energy-innovation`
 
 ---
 
-##  Institusi
-
-| Logo | Nama |
-|------|------|
-| Kemendiktisaintek | Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi |
-| Diktisaintek Berdampak | Program Direktorat Jenderal Pendidikan Tinggi |
-| STITEK Bontang | Sekolah Tinggi Teknologi Bontang |
-
----
-
 ##  Lisensi
 
 This project was created for educational and competition purposes.
