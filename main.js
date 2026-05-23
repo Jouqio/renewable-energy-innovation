@@ -303,3 +303,5 @@ document.addEventListener("DOMContentLoaded", () => {
     "🌿 Renewable Energy Website — Loaded. Syauqi Nuzul Abdi · STITEK Bontang",
   );
 });
+
+hsla
