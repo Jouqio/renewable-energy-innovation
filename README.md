@@ -64,13 +64,13 @@ Tiga pilar inovasi digital untuk pengelolaan energi cerdas:
 
 ##  Fitur Utama
 
-- 🌍 **Split Earth Animation** — Visualisasi interaktif perbandingan bumi polusi vs bumi hijau
-- 📊 **Animated Progress Bar** — Count-up animasi data fakta energi Indonesia
-- 🌿 **Eco Design** — Tampilan natural, clean, dan modern selaras dengan poster
-- 💎 **Glass Effect UI** — Efek kaca halus di navbar, card, dan CTA section
-- 📱 **Fully Responsive** — Tampil sempurna di HP, tablet, dan laptop
-- ⚡ **Smooth Animations** — Scroll-triggered fade-up & hover interactions
-- 🍔 **Hamburger Menu** — Navigasi mobile yang smooth dan accessible
+-  **Split Earth Animation** — Visualisasi interaktif perbandingan bumi polusi vs bumi hijau
+-  **Animated Progress Bar** — Count-up animasi data fakta energi Indonesia
+-  **Eco Design** — Tampilan natural, clean, dan modern selaras dengan poster
+-  **Glass Effect UI** — Efek kaca halus di navbar, card, dan CTA section
+-  **Fully Responsive** — Tampil sempurna di HP, tablet, dan laptop
+-  **Smooth Animations** — Scroll-triggered fade-up & hover interactions
+-  **Hamburger Menu** — Navigasi mobile yang smooth dan accessible
 
 ---
 
@@ -139,20 +139,20 @@ Akses: `https://syauqinzul.github.io/renewable-energy-innovation`
 
 ---
 
-## 👤 Pembuat
+##  Pembuat
 
 **Syauqi Nuzul Abdi**  
 Mahasiswa Inovasi Energi · STITEK Bontang
 
 | Kontak | |
 |--------|--|
-| 📧 Email | nuzulabdisyauqi@gmail.com |
-| 📷 Instagram | [@syauqinzul](https://instagram.com/syauqinzul) |
-| 📞 Telepon | +62 813 3443 2910 |
+|  Email | nuzulabdisyauqi@gmail.com |
+|  Instagram | [@syauqinzul](https://instagram.com/syauqinzul) |
+|  Telepon | +62 813 3443 2910 |
 
 ---
 
-## 🏛️ Institusi
+##  Institusi
 
 | Logo | Nama |
 |------|------|
@@ -162,7 +162,7 @@ Mahasiswa Inovasi Energi · STITEK Bontang
 
 ---
 
-## 📄 Lisensi
+##  Lisensi
 
 Proyek ini dibuat untuk keperluan **lomba poster Hari Bumi Sedunia 2026** yang diselenggarakan oleh STITEK Bontang.  
 © 2026 Syauqi Nuzul Abdi · All Rights Reserved.
@@ -170,5 +170,5 @@ Proyek ini dibuat untuk keperluan **lomba poster Hari Bumi Sedunia 2026** yang d
 ---
 
 <div align="center">
-  <strong>🌿 Teknologi hijau hari ini, kehidupan berkelanjutan untuk generasi esok.</strong>
+  <strong> Teknologi hijau hari ini, kehidupan berkelanjutan untuk generasi esok.</strong>
 </div>
