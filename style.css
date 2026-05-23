@@ -1787,7 +1787,7 @@ img {
 }
 
 .plg-qr {
-  grid-column: 1;
+  grid-column: 4;
   grid-row: 3;
   background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
 }
